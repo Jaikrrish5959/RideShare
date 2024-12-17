@@ -1,0 +1,119 @@
+.trip-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: none;
+  overflow: hidden;
+}
+
+.trip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.trip-header {
+  background: linear-gradient(135deg, #4a9eff 0%, #2d7eff 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 16px 16px 0 0;
+}
+
+.trip-content {
+  padding: 1.5rem;
+}
+
+.trip-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.trip-icon {
+  width: 24px;
+  height: 24px;
+  color: #4a9eff;
+}
+
+.request-button {
+  background: linear-gradient(135deg, #4a9eff 0%, #2d7eff 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.request-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 126, 255, 0.3);
+}
+
+.request-button:disabled {
+  background: #e8e8e8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.search-form {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.search-form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+}
+
+.search-button {
+  background: linear-gradient(45deg, #4a9eff, #6366f1);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.search-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.trip-card {
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.trip-header h5 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.trip-content {
+  background: white;
+}
+
+.trip-info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #4b5563;
+}
+
+.trip-info-label {
+  font-weight: 500;
+  color: #6b7280;
+  min-width: 100px;
+} 

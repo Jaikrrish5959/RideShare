@@ -1,0 +1,284 @@
+/* src/components/PostTrip.css */
+
+.post-trip-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.post-trip-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+}
+
+.post-trip-container h2 {
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.form-floating {
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 0.25rem;
+  padding-top: 0;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.form-floating:focus-within {
+  background: rgba(74, 158, 255, 0.05);
+  padding: 0.35rem;
+  padding-top: 0;
+}
+
+.form-floating label {
+  color: #4a5568;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.modern-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  transition: all 0.3s ease;
+  color: #2d3748;
+}
+
+.modern-input::placeholder {
+  color: #6B7280;
+  opacity: 1;
+  font-size: 1rem;
+}
+
+/* Date and time input styling */
+.modern-input[type="date"],
+.modern-input[type="time"] {
+  padding-right: 0.5rem;
+  color: #2d3748;
+}
+
+.modern-input[type="date"]::-webkit-calendar-picker-indicator,
+.modern-input[type="time"]::-webkit-calendar-picker-indicator {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.modern-input:not(:focus):placeholder-shown {
+  color: #2d3748;
+}
+
+.modern-input:hover {
+  border-color: #4a9eff;
+}
+
+.modern-input:focus {
+  border-color: #4a9eff;
+  box-shadow: 0 0 0 4px rgba(74, 158, 255, 0.15);
+  outline: none;
+}
+
+.modern-input:focus::placeholder {
+  color: transparent;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4a9eff 0%, #6366f1 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.submit-button::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.submit-button:hover::after {
+  left: 100%;
+}
+
+/* Input group styling */
+.input-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Success message styling */
+.success-message {
+  background: rgba(72, 187, 120, 0.1);
+  color: #2f855a;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Error message styling */
+.alert-danger {
+  background: rgba(245, 101, 101, 0.1);
+  color: #c53030;
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .post-trip-container {
+    padding: 1.5rem;
+    margin: 20px;
+  }
+
+  .input-group {
+    grid-template-columns: 1fr;
+  }
+
+  .modern-input {
+    font-size: 0.95rem;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+    padding: 0.875rem;
+  }
+}
+
+/* Add specific styling for number input */
+.modern-input[type="number"] {
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  color: #2d3748;
+}
+
+/* Hide spinner buttons for number input */
+.modern-input[type="number"]::-webkit-inner-spin-button,
+.modern-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.modern-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Specific styling for Seats Available label */
+.form-floating:last-of-type label {
+  margin-bottom: 1.5rem; /* Increased spacing for Seats Available label */
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* Ensure placeholder text is properly positioned for number input */
+.modern-input[type="number"]::placeholder {
+  color: #2d3748;
+  opacity: 1;
+  font-size: 1rem;
+  position: static;
+  top: auto;
+}
+
+.seats-field {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.seats-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.seats-button {
+  background: linear-gradient(135deg, #4a9eff 0%, #6366f1 100%);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.seats-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.seats-input {
+  text-align: center;
+  width: 100px !important;
+  margin: 0 0.5rem;
+}
+
+.form-floating label {
+  position: static;
+  transform: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.seats-label {
+  display: block;
+  color: #4a5568;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+  
