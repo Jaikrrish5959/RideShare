@@ -110,17 +110,31 @@ router.get('/', auth, async (req, res) => {
 
     const trips = await Trip.findAll({
       where: whereClause,
-      include: [{
-        model: User,
-        attributes: ['username', 'email']
-      }],
+      include: [
+        {
+          model: User,
+          attributes: ['username', 'email']
+        },
+        {
+          model: RideRequest,
+          attributes: ['status'],
+          where: { status: 'pending' },
+          required: false
+        }
+      ],
       order: [
         ['date', 'ASC'],
         ['time', 'ASC']
       ]
     });
 
-    res.json(trips);
+    // Add pending requests count to each trip
+    const tripsWithCount = trips.map(trip => ({
+      ...trip.toJSON(),
+      pendingRequestsCount: trip.RideRequests ? trip.RideRequests.length : 0
+    }));
+
+    res.json(tripsWithCount);
   } catch (error) {
     console.error('Error fetching trips:', error);
     res.status(500).json({ message: 'Failed to fetch trips' });

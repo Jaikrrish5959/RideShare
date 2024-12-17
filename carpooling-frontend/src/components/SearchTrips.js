@@ -145,6 +145,7 @@ const SearchTrips = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const isOwnTrip = trip.userId === user.id;
     const hasPhoneNumber = !!user.phoneNumber;
+    const pendingRequests = trip.pendingRequestsCount || 0;
 
     return (
       <Card key={trip.id} className="mb-3 trip-card">
@@ -156,7 +157,12 @@ const SearchTrips = () => {
             Date: {trip.date}<br />
             Time: {trip.time}<br />
             Posted by: {isOwnTrip ? 'You' : (trip.User?.username || 'Unknown')}<br />
-            Available Seats: {trip.seats_available}
+            Available Seats: {trip.seats_available}<br />
+            {pendingRequests > 0 && (
+              <span className="queue-info">
+                People in Queue: <span className="queue-count">{pendingRequests}</span><br />
+              </span>
+            )}
           </Card.Text>
           <Button
             variant="primary"
