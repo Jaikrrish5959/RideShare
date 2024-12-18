@@ -23,10 +23,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// Add this right after the debug middleware
-app.get('/api/test', (req, res) => {
-  console.log('Test route hit');
-  res.json({ message: 'Backend is running' });
+// Add root route handler
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Carpooling API Server',
+    status: 'running',
+    version: '1.0.0'
+  });
 });
 
 // Routes
