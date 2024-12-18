@@ -13,6 +13,8 @@ services:
         value: dpg-ctheb2jtq21c739mjtjg-a
       - key: DB_USER
         value: carpooling_wlx7_user
+      - key: DB_PORT
+        value: "3306"
       - key: DB_PASSWORD
         value: XWdjMTP5jFtAELhghwsZ3qgQV9Ij7Xm1
       - key: DB_NAME
