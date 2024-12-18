@@ -31,4 +31,4 @@ services:
     staticPublishPath: ./carpooling-frontend/build
     envVars:
       - key: REACT_APP_API_URL
-        value: https://YOUR_BACKEND_URL
+        value: https://carpooling-website.onrender.com

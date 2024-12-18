@@ -33,7 +33,7 @@
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
-    "build": "REACT_APP_API_URL=YOUR_BACKEND_URL react-scripts build",
+    "build": "REACT_APP_API_URL=https://carpooling-website.onrender.com react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
