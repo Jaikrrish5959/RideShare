@@ -8,7 +8,12 @@ const userRoutes = require('./routes/user.routes');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://your-frontend-url.onrender.com']
+    : 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
 
 // Debug middleware to log all requests

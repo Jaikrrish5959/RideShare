@@ -1,0 +1,34 @@
+# In root directory
+# Create render.yaml
+services:
+  - type: web
+    name: carpooling-backend
+    env: node
+    buildCommand: cd carpooling-backend && npm install
+    startCommand: cd carpooling-backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_HOST
+        value: YOUR_DB_HOST
+      - key: DB_USER
+        value: YOUR_DB_USER
+      - key: DB_PASSWORD
+        value: YOUR_DB_PASSWORD
+      - key: DB_NAME
+        value: YOUR_DB_NAME
+      - key: JWT_SECRET
+        value: YOUR_JWT_SECRET
+      - key: EMAIL_USER
+        value: YOUR_EMAIL
+      - key: EMAIL_PASS
+        value: YOUR_EMAIL_APP_PASSWORD
+
+  - type: web
+    name: carpooling-frontend
+    env: static
+    buildCommand: cd carpooling-frontend && npm install && npm run build
+    staticPublishPath: ./carpooling-frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://YOUR_BACKEND_URL
