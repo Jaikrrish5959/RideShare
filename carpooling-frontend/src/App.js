@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import SearchTrips from './components/SearchTrips';
 import PostTrip from './components/PostTrip';

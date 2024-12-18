@@ -29,7 +29,7 @@ const emailService = {
   sendVerificationEmail: async (email, verificationToken) => {
     console.log('Sending verification email to:', email);
     
-    const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
+    const verificationLink = `${process.env.FRONTEND_URL}/#/verify-email?token=${verificationToken}`;
     
     const mailOptions = {
       from: `"Carpooling Service" <${process.env.EMAIL_USER}>`,
