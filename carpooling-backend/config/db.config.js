@@ -2,13 +2,19 @@ const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
 const sequelize = new Sequelize(
-  'carpooling_wlx7', // database name
-  'carpooling_wlx7_user', // username
-  process.env.DB_PASSWORD, // password from environment variable
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: 'dpg-otheb2jtq21c739mjtjg-a',
-    port: 5432,
-    dialect: 'postgres', // Change this from 'mysql' to 'postgres'
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    },
     pool: {
       max: 5,
       min: 0,
