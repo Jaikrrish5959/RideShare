@@ -10,19 +10,19 @@ services:
       - key: NODE_ENV
         value: production
       - key: DB_HOST
-        value: YOUR_DB_HOST
+        value: dpg-ctheb2jtq21c739mjtjg-a
       - key: DB_USER
-        value: YOUR_DB_USER
+        value: carpooling_wlx7_user
       - key: DB_PASSWORD
-        value: YOUR_DB_PASSWORD
+        value: XWdjMTP5jFtAELhghwsZ3qgQV9Ij7Xm1
       - key: DB_NAME
-        value: YOUR_DB_NAME
+        value: carpooling_wlx7
       - key: JWT_SECRET
-        value: YOUR_JWT_SECRET
+        value: 5d99e437893f12f1b8c0419d13f8f0b8e772ab88f26f5075d7d15c8b3777d453
       - key: EMAIL_USER
-        value: YOUR_EMAIL
+        value: varunshankaralt@gmail.com
       - key: EMAIL_PASS
-        value: YOUR_EMAIL_APP_PASSWORD
+        value: symc mspl uoin zmwo
 
   - type: web
     name: carpooling-frontend

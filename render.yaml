@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: carpooling-backend
+    env: node
+    buildCommand: cd carpooling-backend && npm install
+    startCommand: cd carpooling-backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_HOST
+        value: your_database_host
+      - key: DB_USER
+        value: your_database_user
+      - key: DB_PASSWORD
+        value: your_database_password
+      - key: DB_NAME
+        value: your_database_name
+      - key: JWT_SECRET
+        value: your_jwt_secret
+      - key: EMAIL_USER
+        value: your_email
+      - key: EMAIL_PASS
+        value: your_email_app_password 
