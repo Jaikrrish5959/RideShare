@@ -1,5 +1,6 @@
 // src/App.js
 import React, { useState, useEffect, useCallback } from 'react';
+import { debounce } from 'lodash';  // Add this with other imports
 import { HashRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import SearchTrips from './components/SearchTrips';
