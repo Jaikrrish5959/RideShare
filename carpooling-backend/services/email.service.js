@@ -133,7 +133,7 @@ const emailService = {
                 </p>
               `}
               <div style="text-align: center; margin: 30px 0;">
-                <a href="${process.env.FRONTEND_URL}/trips"
+                <a href="${process.env.FRONTEND_URL}/#/search"
                    style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
                   View Available Trips
                 </a>
@@ -166,9 +166,9 @@ const emailService = {
               <pre style="margin: 0; white-space: pre-wrap;">${changes}</pre>
             </div>
             <div style="text-align: center; margin: 30px 0;">
-              <a href="${process.env.FRONTEND_URL}/trips/requests"
+              <a href="${process.env.FRONTEND_URL}/#/my-trips"
                  style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
-                View My Requests
+                View My Trips
               </a>
             </div>
           </div>
@@ -204,7 +204,7 @@ const emailService = {
               </ul>
             </div>
             <div style="text-align: center; margin: 30px 0;">
-              <a href="${process.env.FRONTEND_URL}/trips"
+              <a href="${process.env.FRONTEND_URL}/#/search"
                  style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
                 Find Another Trip
               </a>
@@ -248,7 +248,7 @@ const emailService = {
               </ul>
             </div>
             <div style="text-align: center; margin: 30px 0;">
-              <a href="${process.env.FRONTEND_URL}/trips/requests"
+              <a href="${process.env.FRONTEND_URL}/#/ride-requests"
                  style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
                 View Request
               </a>
