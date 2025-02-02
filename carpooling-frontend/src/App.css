@@ -1,5 +1,33 @@
-/* Add top margin to account for fixed navbar */
+/* Base styles */
 .main-content {
-  margin-top: 70px; /* Adjust this value based on your navbar height */
+  margin-top: 70px;
   padding: 20px;
-} 
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .main-content {
+    margin-top: 60px; /* Slightly smaller margin for mobile */
+    padding: 10px;
+  }
+}
+
+/* Handle iOS Safari safe areas */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .main-content {
+    padding-top: calc(20px + env(safe-area-inset-top));
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    padding-left: calc(20px + env(safe-area-inset-left));
+    padding-right: calc(20px + env(safe-area-inset-right));
+  }
+}
+
+/* Add viewport height fix for mobile browsers */
+.min-vh-100 {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
+}

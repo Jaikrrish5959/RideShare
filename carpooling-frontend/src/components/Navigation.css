@@ -2,6 +2,7 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
 }
 
 .nav-link {
@@ -57,4 +58,58 @@
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(255, 74, 74, 0);
   }
-} 
+}
+
+/* Mobile navigation styles */
+@media screen and (max-width: 768px) {
+  .modern-navbar {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+
+  .navbar-toggler {
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+  }
+
+  .navbar-nav {
+    padding: 0.5rem 0;
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px;
+  }
+
+  .nav-item {
+    margin: 2px 0;
+  }
+
+  /* Collapse menu styling */
+  .navbar-collapse {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 12px;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* User info in mobile view */
+  .user-info-mobile {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+}
+
+/* Fix for iOS safe areas */
+@supports (padding: env(safe-area-inset-top)) {
+  .modern-navbar {
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
