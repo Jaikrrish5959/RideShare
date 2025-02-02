@@ -281,4 +281,43 @@
   margin-bottom: 0.5rem;
   font-size: 1rem;
 }
-  
+
+@media screen and (max-width: 768px) {
+  .post-trip-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control {
+    font-size: 1.1rem !important;
+    padding: 0.75rem 1rem !important;
+    height: 48px !important;
+  }
+
+  .btn {
+    font-size: 1.2rem !important;
+    padding: 0.75rem 1.25rem !important;
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .seats-input {
+    font-size: 1.2rem !important;
+    height: 48px !important;
+  }
+
+  .seats-button {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+}
