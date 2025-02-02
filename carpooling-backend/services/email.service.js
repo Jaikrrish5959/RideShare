@@ -56,12 +56,12 @@ const emailService = {
     const verificationLink = `${process.env.FRONTEND_URL}/#/verify-email?token=${verificationToken}`;
     
     const mailOptions = {
-      from: `"Carpooling Service" <${process.env.EMAIL_USER}>`,
+      from: `"ShareRides" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: 'Verify Your Email - Carpooling Website',
+      subject: 'Verify Your Email - ShareRides',
       html: `
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h2 style="color: #333; text-align: center;">Welcome to Carpooling Service!</h2>
+          <h2 style="color: #333; text-align: center;">Welcome to ShareRides!</h2>
           <p style="color: #666;">
             Thank you for registering. Please click the button below to verify your email address:
           </p>
@@ -114,7 +114,7 @@ const emailService = {
 
       await emailService.retryOperation(async () => {
         const mailOptions = {
-          from: `"Carpooling Service" <${process.env.EMAIL_USER}>`,
+          from: `"ShareRides" <${process.env.EMAIL_USER}>`,
           to: user.email,
           subject: `Ride Request ${status.charAt(0).toUpperCase() + status.slice(1)}`,
           html: `
@@ -153,7 +153,7 @@ const emailService = {
   sendTripUpdateNotification: async (userEmail, changes, trip) => {
     try {
       const mailOptions = {
-        from: `"Carpooling Service" <${process.env.EMAIL_USER}>`,
+        from: `"ShareRides" <${process.env.EMAIL_USER}>`,
         to: userEmail,
         subject: 'Trip Details Updated',
         html: `
@@ -185,7 +185,7 @@ const emailService = {
   sendTripCancellationNotification: async (userEmail, trip) => {
     try {
       const mailOptions = {
-        from: `"Carpooling Service" <${process.env.EMAIL_USER}>`,
+        from: `"ShareRides" <${process.env.EMAIL_USER}>`,
         to: userEmail,
         subject: 'Trip Cancelled',
         html: `
@@ -224,7 +224,7 @@ const emailService = {
   sendNewRideRequestNotification: async (driverEmail, request, trip) => {
     try {
       const mailOptions = {
-        from: `"Carpooling Service" <${process.env.EMAIL_USER}>`,
+        from: `"ShareRides" <${process.env.EMAIL_USER}>`,
         to: driverEmail,
         subject: 'New Ride Request',
         html: `

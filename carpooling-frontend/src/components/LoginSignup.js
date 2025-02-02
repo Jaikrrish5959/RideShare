@@ -62,7 +62,7 @@ const LoginSignup = ({ onLogin }) => {
     <div className="home-container">
       <div className="content-wrapper">
         <div className="welcome-text">
-          <h2>Welcome to the Carpooling Website</h2>
+          <h2>Welcome to ShareRides</h2>
           <p>Find or post carpool trips easily with our service</p>
         </div>
         <div className="login-form">

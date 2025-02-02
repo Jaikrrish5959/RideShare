@@ -115,7 +115,7 @@ const Settings = ({ user, onUserUpdate }) => {
       <h2>Settings</h2>
       {!user?.phoneNumber && (
         <Alert variant="warning">
-          Welcome! Please set your phone number to start using the carpooling service.
+          Welcome! Please set your phone number to start using our service.
           This is required for safety and communication purposes.
         </Alert>
       )}

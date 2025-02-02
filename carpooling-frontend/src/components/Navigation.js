@@ -24,7 +24,7 @@ const Navigation = ({ isAuthenticated, onLogout, user, incomingRequestsCount }) 
       onToggle={setExpanded}
     >
       <Container fluid>
-        <Navbar.Brand as={Link} to="/" onClick={closeMenu}>Carpooling</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" onClick={closeMenu}>ShareRides</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">

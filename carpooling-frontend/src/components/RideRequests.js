@@ -170,7 +170,7 @@ const RideRequests = ({ user }) => {
           <Card.Text>
             Date: {request.Trip.date}<br />
             Time: {request.Trip.time}<br />
-            Driver: {request.Trip.User?.username || request.Trip.User?.email || 'Unknown'}<br />
+            Host: {request.Trip.User?.username || request.Trip.User?.email || 'Unknown'}<br />
             Status: <span className={`fw-bold text-${getStatusColor(request.status)}`}>
               {request.status.toUpperCase()}
             </span>
@@ -214,7 +214,7 @@ const RideRequests = ({ user }) => {
                 {isIncoming ? (
                   <>Passenger: {request.requester?.username || request.requester?.email || 'Unknown'}<br /></>
                 ) : (
-                  <>Driver: {request.Trip.User?.username || request.Trip.User?.email || 'Unknown'}<br /></>
+                  <>Host: {request.Trip.User?.username || request.Trip.User?.email || 'Unknown'}<br /></>
                 )}
                 {request.status === 'accepted' && (
                   <>
