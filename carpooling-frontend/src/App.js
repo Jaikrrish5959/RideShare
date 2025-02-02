@@ -79,6 +79,20 @@ function AppContent() {
   }, [navigate, location.pathname, fetchIncomingRequestsCount]);
 
   useEffect(() => {
+    const handleStorage = () => {
+      // Detect localStorage changes from other tabs
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    };
+  
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
+
+  useEffect(() => {
     let interval;
     
     const startPolling = async () => {

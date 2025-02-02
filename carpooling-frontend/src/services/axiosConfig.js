@@ -23,6 +23,11 @@ instance.interceptors.request.use(
   },
   (error) => {
     console.error('Axios request error:', error);
+    if (error.response?.status === 401) {
+      // Clear storage and reload on auth errors
+      localStorage.clear();
+      window.location.reload();
+    }
     return Promise.reject(error);
   }
 );
