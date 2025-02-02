@@ -4,8 +4,18 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth.routes');
 const tripRoutes = require('./routes/trip.routes');
 const userRoutes = require('./routes/user.routes');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
+
+// Add stricter rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests, please try again later'
+});
+
+app.use(limiter);
 
 // Middleware
 app.use(cors({

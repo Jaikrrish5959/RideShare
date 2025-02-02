@@ -7,20 +7,16 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
     dialect: 'postgres',
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
-    },
+    // Reduce connection pool size
     pool: {
-      max: 5,
+      max: 3, // Reduce from 5
       min: 0,
       acquire: 30000,
       idle: 10000
-    }
+    },
+    // Add query logging only in development
+    logging: process.env.NODE_ENV === 'development' ? console.log : false
   }
 );
 

@@ -46,6 +46,17 @@ function AppContent() {
     }
   }, []);
 
+  // Increase polling interval to reduce requests
+  const POLLING_INTERVAL = 60000; // Change from 30000 to 60000
+
+  // Add request debouncing
+  const debouncedFetch = useCallback(
+    debounce(async () => {
+      await fetchIncomingRequestsCount();
+    }, 1000),
+    []
+  );
+
   useEffect(() => {
     const initializeApp = async () => {
       const token = localStorage.getItem('token');
@@ -73,7 +84,7 @@ function AppContent() {
       if (isAuthenticated) {
         console.log('Starting polling for request count');
         await fetchIncomingRequestsCount();
-        interval = setInterval(fetchIncomingRequestsCount, 30000);
+        interval = setInterval(fetchIncomingRequestsCount, POLLING_INTERVAL);
       }
     };
 

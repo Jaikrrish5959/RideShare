@@ -58,6 +58,14 @@ const SearchTrips = () => {
     };
   }, []);
 
+  // Clear data when component unmounts
+  useEffect(() => {
+    return () => {
+      setTrips([]);
+      setError(null);
+    };
+  }, []);
+
   const handleRequestRide = async (tripId) => {
     try {
       const user = JSON.parse(localStorage.getItem('user') || '{}');

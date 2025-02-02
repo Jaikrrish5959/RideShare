@@ -25,6 +25,30 @@ transporter.verify(function(error, success) {
   }
 });
 
+// Add email queue to prevent overwhelming free SMTP service
+const emailQueue = [];
+const MAX_EMAILS_PER_MINUTE = 10;
+let emailsSentInLastMinute = 0;
+
+const processEmailQueue = async () => {
+  if (emailQueue.length === 0 || emailsSentInLastMinute >= MAX_EMAILS_PER_MINUTE) {
+    return;
+  }
+
+  const email = emailQueue.shift();
+  try {
+    await transporter.sendMail(email);
+    emailsSentInLastMinute++;
+  } catch (error) {
+    console.error('Failed to send email:', error);
+  }
+};
+
+// Reset counter every minute
+setInterval(() => {
+  emailsSentInLastMinute = 0;
+}, 60000);
+
 const emailService = {
   sendVerificationEmail: async (email, verificationToken) => {
     console.log('Sending verification email to:', email);
@@ -59,9 +83,9 @@ const emailService = {
     };
 
     try {
-      const info = await transporter.sendMail(mailOptions);
-      console.log('Verification email sent:', info.messageId);
-      return info;
+      emailQueue.push(mailOptions);
+      await processEmailQueue();
+      console.log('Verification email queued:', email);
     } catch (error) {
       console.error('Email sending error:', {
         message: error.message,
@@ -118,7 +142,8 @@ const emailService = {
           `
         };
 
-        await transporter.sendMail(mailOptions);
+        emailQueue.push(mailOptions);
+        await processEmailQueue();
       });
     } catch (error) {
       console.error('Error sending ride request update email:', error);
@@ -150,7 +175,8 @@ const emailService = {
         `
       };
 
-      await transporter.sendMail(mailOptions);
+      emailQueue.push(mailOptions);
+      await processEmailQueue();
     } catch (error) {
       console.error('Error sending trip update notification:', error);
     }
@@ -187,8 +213,9 @@ const emailService = {
         `
       };
 
-      await transporter.sendMail(mailOptions);
-      console.log('Trip cancellation email sent to:', userEmail);
+      emailQueue.push(mailOptions);
+      await processEmailQueue();
+      console.log('Trip cancellation email queued:', userEmail);
     } catch (error) {
       console.error('Error sending trip cancellation notification:', error);
     }
@@ -230,12 +257,13 @@ const emailService = {
         `
       };
 
-      await transporter.sendMail(mailOptions);
-      console.log('New ride request notification sent to:', driverEmail);
+      emailQueue.push(mailOptions);
+      await processEmailQueue();
+      console.log('New ride request notification queued:', driverEmail);
     } catch (error) {
       console.error('Error sending new ride request notification:', error);
     }
   }
 };
 
-module.exports = emailService; 
+module.exports = emailService;
