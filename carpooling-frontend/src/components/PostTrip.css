@@ -42,12 +42,13 @@
 }
 
 .form-floating label {
-  color: var(--text-secondary);
+  color: var(--text-secondary) !important;
   font-weight: 500;
   margin-bottom: 0.5rem;
   display: block;
   font-size: 1rem;
   letter-spacing: 0.01em;
+  transition: color 0.3s ease;
 }
 
 .modern-input {
@@ -56,29 +57,38 @@
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 1rem;
-  background: var(--bg-primary);
+  background: var(--bg-primary) !important;
   transition: all 0.3s ease;
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
 }
 
 .modern-input::placeholder {
-  color: var(--text-muted);
-  opacity: 1;
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
   font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
-/* Date and time input styling */
+/* Fix for date and time inputs to show proper text color */
 .modern-input[type="date"],
 .modern-input[type="time"] {
   padding-right: 0.5rem;
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
 }
 
+/* Ensure the input value text is visible */
+.modern-input[type="date"]:valid,
+.modern-input[type="time"]:valid {
+  color: var(--text-primary) !important;
+}
+
+/* Date and time picker icon styling */
 .modern-input[type="date"]::-webkit-calendar-picker-indicator,
 .modern-input[type="time"]::-webkit-calendar-picker-indicator {
   margin-left: 0;
   margin-right: 0.5rem;
   filter: var(--icon-filter, none);
+  transition: filter 0.3s ease;
 }
 
 [data-theme="dark"] .modern-input[type="date"]::-webkit-calendar-picker-indicator,
@@ -86,8 +96,9 @@
   filter: invert(1);
 }
 
-.modern-input:not(:focus):placeholder-shown {
-  color: var(--text-primary);
+/* Remove placeholder behavior when input has value */
+.modern-input:not(:placeholder-shown) {
+  color: var(--text-primary) !important;
 }
 
 .modern-input:hover {
@@ -98,7 +109,8 @@
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 4px rgba(74, 158, 255, 0.15);
   outline: none;
-  background: var(--bg-primary);
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
 }
 
 .modern-input:focus::placeholder {
@@ -221,19 +233,13 @@
 }
 
 /* Specific styling for Seats Available label */
-.form-floating:last-of-type label {
-  margin-bottom: 1.5rem; /* Increased spacing for Seats Available label */
-  color: var(--text-secondary);
+.seats-label {
+  display: block;
+  color: var(--text-secondary) !important;
   font-weight: 500;
-}
-
-/* Ensure placeholder text is properly positioned for number input */
-.modern-input[type="number"]::placeholder {
-  color: var(--text-primary);
-  opacity: 1;
+  margin-bottom: 0.5rem;
   font-size: 1rem;
-  position: static;
-  top: auto;
+  transition: color 0.3s ease;
 }
 
 .seats-field {
@@ -272,21 +278,18 @@
   text-align: center;
   width: 100px !important;
   margin: 0 0.5rem;
+  color: var(--text-primary) !important;
+  background: var(--bg-primary) !important;
 }
 
+/* Fix form floating labels positioning */
 .form-floating label {
-  position: static;
-  transform: none;
+  position: static !important;
+  transform: none !important;
   padding: 0;
   margin-bottom: 0.5rem;
-}
-
-.seats-label {
-  display: block;
-  color: var(--text-secondary);
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
+  background: transparent !important;
+  color: var(--text-secondary) !important;
 }
 
 @media screen and (max-width: 768px) {

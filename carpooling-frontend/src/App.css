@@ -58,27 +58,53 @@ body {
   text-size-adjust: none;
 }
 
-/* Ensure all text elements inherit theme colors */
-* {
+/* Ensure all text elements inherit theme colors with higher specificity */
+*,
+*::before,
+*::after {
   color: inherit;
   -webkit-text-size-adjust: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Specific text element overrides */
+/* Specific text element overrides with higher specificity */
 p, span, div, h1, h2, h3, h4, h5, h6, 
 label, td, th, li, a, small, 
-.text-muted, .text-secondary {
+.text-muted, .text-secondary,
+.form-label, .form-text, .form-control,
+.card-text, .card-title, .card-subtitle,
+.navbar-text, .nav-link, .navbar-brand,
+.btn, .alert {
   color: var(--text-primary) !important;
 }
 
-.text-muted {
+/* Override Bootstrap's muted classes with theme colors */
+.text-muted,
+.text-muted *,
+small.text-muted,
+.form-text {
   color: var(--text-muted) !important;
 }
 
-.text-secondary {
+.text-secondary,
+.text-secondary *,
+small.text-secondary {
   color: var(--text-secondary) !important;
+}
+
+/* Force Bootstrap elements to respect theme */
+.form-control,
+.form-control::placeholder,
+.form-select,
+.form-select::placeholder {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-primary) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
 }
 
 /* Fix navbar gap */
@@ -104,8 +130,14 @@ label, td, th, li, a, small,
   color: var(--text-primary) !important;
 }
 
-[data-theme="dark"] .card * {
+[data-theme="dark"] .card *,
+[data-theme="dark"] .card .text-muted,
+[data-theme="dark"] .card small {
   color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .card .text-muted {
+  color: var(--text-muted) !important;
 }
 
 [data-theme="dark"] .form-control {
@@ -153,16 +185,37 @@ label, td, th, li, a, small,
   color: var(--accent-primary) !important;
 }
 
-/* Light theme text overrides */
-[data-theme="light"] * {
+/* Light theme text overrides with higher specificity */
+[data-theme="light"] *,
+[data-theme="light"] .text-muted,
+[data-theme="light"] small {
   color: var(--text-primary) !important;
 }
 
-[data-theme="light"] .text-muted {
+[data-theme="light"] .text-muted,
+[data-theme="light"] small.text-muted {
   color: var(--text-muted) !important;
 }
 
-[data-theme="light"] .text-secondary {
+[data-theme="light"] .text-secondary,
+[data-theme="light"] small.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+/* Dark theme text overrides with higher specificity */
+[data-theme="dark"] *,
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] small {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] small.text-muted {
+  color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] small.text-secondary {
   color: var(--text-secondary) !important;
 }
 
