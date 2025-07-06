@@ -14,6 +14,7 @@ import RideRequests from './components/RideRequests';
 import MyTrips from './components/MyTrips';
 import axios from './services/axiosConfig';
 import LoginSignup from './components/LoginSignup';
+import { ThemeProvider } from './contexts/ThemeContext';
 import './App.css';
 
 // Create a new component that uses navigation hooks
@@ -210,9 +211,11 @@ function AppContent() {
 // Main App component that provides the Router context
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </ThemeProvider>
   );
 }
 

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 import './Navigation.css';
 
 const Navigation = ({ isAuthenticated, onLogout, user, incomingRequestsCount }) => {
@@ -25,7 +26,10 @@ const Navigation = ({ isAuthenticated, onLogout, user, incomingRequestsCount }) 
     >
       <Container fluid>
         <Navbar.Brand as={Link} to="/" onClick={closeMenu}>ShareRides</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" />
+        <div className="d-flex align-items-center d-lg-none">
+          <ThemeToggle />
+          <Navbar.Toggle aria-controls="navbar-nav" className="ms-2" />
+        </div>
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/search" onClick={closeMenu}>Search Trips</Nav.Link>
@@ -58,7 +62,8 @@ const Navigation = ({ isAuthenticated, onLogout, user, incomingRequestsCount }) 
                 <small className="text-muted">{user?.phoneNumber || 'No phone set'}</small>
               </div>
             </div>
-            <Button variant="outline-danger" size="sm" onClick={onLogout}>
+            <ThemeToggle />
+            <Button variant="outline-danger" size="sm" onClick={onLogout} className="ms-3">
               Logout
             </Button>
           </div>

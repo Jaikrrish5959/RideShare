@@ -1,14 +1,15 @@
 .modern-navbar {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-tertiary);
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px var(--shadow-light);
   padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
 }
 
 .nav-link {
   position: relative;
   padding: 0.5rem 1rem;
-  color: #333;
+  color: var(--text-primary) !important;
   font-weight: 500;
   transition: all 0.3s ease;
 }
@@ -20,7 +21,7 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: #4a9eff;
+  background: var(--accent-primary);
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }
@@ -29,11 +30,29 @@
   width: 100%;
 }
 
+.navbar-brand {
+  color: var(--text-primary) !important;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.navbar-toggler {
+  border-color: var(--border-color) !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+[data-theme="dark"] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 .notification-badge {
   position: absolute;
   top: -5px;
   right: -5px;
-  background: #ff4a4a;
+  background: var(--danger-color);
   color: white;
   border-radius: 50%;
   width: 20px;
@@ -92,22 +111,23 @@
 
   /* Collapse menu styling */
   .navbar-collapse {
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--bg-tertiary);
     border-radius: 12px;
     margin-top: 0.5rem;
     padding: 0.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px var(--shadow-light);
   }
 
   /* User info in mobile view */
   .user-info-mobile {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border-color);
     margin-top: 0.5rem;
     padding-top: 0.5rem;
   }
 
   .user-info-mobile small {
     font-size: 1rem !important;
+    color: var(--text-secondary) !important;
   }
 }
 

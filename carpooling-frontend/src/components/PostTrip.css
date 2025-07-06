@@ -4,22 +4,22 @@
   max-width: 600px;
   margin: 30px auto;
   padding: 2.5rem;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-tertiary);
   border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  box-shadow: 0 8px 32px 0 var(--shadow-medium);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--border-color);
   transform: translateY(0);
   transition: all 0.3s ease;
 }
 
 .post-trip-container:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+  box-shadow: 0 12px 40px 0 var(--shadow-heavy);
 }
 
 .post-trip-container h2 {
-  color: #2d3748;
+  color: var(--text-primary);
   text-align: center;
   margin-bottom: 2rem;
   font-weight: 600;
@@ -42,7 +42,7 @@
 }
 
 .form-floating label {
-  color: #4a5568;
+  color: var(--text-secondary);
   font-weight: 500;
   margin-bottom: 0.5rem;
   display: block;
@@ -53,16 +53,16 @@
 .modern-input {
   width: 100%;
   padding: 0.875rem 1rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 1rem;
-  background: white;
+  background: var(--bg-primary);
   transition: all 0.3s ease;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .modern-input::placeholder {
-  color: #6B7280;
+  color: var(--text-muted);
   opacity: 1;
   font-size: 1rem;
 }
@@ -71,27 +71,34 @@
 .modern-input[type="date"],
 .modern-input[type="time"] {
   padding-right: 0.5rem;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .modern-input[type="date"]::-webkit-calendar-picker-indicator,
 .modern-input[type="time"]::-webkit-calendar-picker-indicator {
   margin-left: 0;
   margin-right: 0.5rem;
+  filter: var(--icon-filter, none);
+}
+
+[data-theme="dark"] .modern-input[type="date"]::-webkit-calendar-picker-indicator,
+[data-theme="dark"] .modern-input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 
 .modern-input:not(:focus):placeholder-shown {
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .modern-input:hover {
-  border-color: #4a9eff;
+  border-color: var(--accent-primary);
 }
 
 .modern-input:focus {
-  border-color: #4a9eff;
+  border-color: var(--accent-primary);
   box-shadow: 0 0 0 4px rgba(74, 158, 255, 0.15);
   outline: none;
+  background: var(--bg-primary);
 }
 
 .modern-input:focus::placeholder {
@@ -104,7 +111,7 @@
   margin-top: 1rem;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, #4a9eff 0%, #6366f1 100%);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   color: white;
   font-weight: 600;
   font-size: 1.1rem;
@@ -154,7 +161,7 @@
 /* Success message styling */
 .success-message {
   background: rgba(72, 187, 120, 0.1);
-  color: #2f855a;
+  color: var(--success-color);
   padding: 1rem;
   border-radius: 12px;
   margin-bottom: 1rem;
@@ -167,7 +174,7 @@
 /* Error message styling */
 .alert-danger {
   background: rgba(245, 101, 101, 0.1);
-  color: #c53030;
+  color: var(--danger-color);
   border: none;
   border-radius: 12px;
   margin-bottom: 1.5rem;
@@ -198,7 +205,7 @@
 .modern-input[type="number"] {
   padding: 0.875rem 1.5rem;
   font-size: 1rem;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 /* Hide spinner buttons for number input */
@@ -216,13 +223,13 @@
 /* Specific styling for Seats Available label */
 .form-floating:last-of-type label {
   margin-bottom: 1.5rem; /* Increased spacing for Seats Available label */
-  color: #4a5568;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 /* Ensure placeholder text is properly positioned for number input */
 .modern-input[type="number"]::placeholder {
-  color: #2d3748;
+  color: var(--text-primary);
   opacity: 1;
   font-size: 1rem;
   position: static;
@@ -242,7 +249,7 @@
 }
 
 .seats-button {
-  background: linear-gradient(135deg, #4a9eff 0%, #6366f1 100%);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   color: white;
   border: none;
   width: 40px;
@@ -276,7 +283,7 @@
 
 .seats-label {
   display: block;
-  color: #4a5568;
+  color: var(--text-secondary);
   font-weight: 500;
   margin-bottom: 0.5rem;
   font-size: 1rem;

@@ -1,7 +1,7 @@
 .trip-card {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--shadow-light);
   transition: all 0.3s ease;
   border: none;
   overflow: hidden;
@@ -9,11 +9,11 @@
 
 .trip-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px var(--shadow-medium);
 }
 
 .trip-header {
-  background: linear-gradient(135deg, #4a9eff 0%, #2d7eff 100%);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   color: white;
   padding: 1rem;
   border-radius: 16px 16px 0 0;
@@ -21,6 +21,8 @@
 
 .trip-content {
   padding: 1.5rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .trip-info {
@@ -33,11 +35,11 @@
 .trip-icon {
   width: 24px;
   height: 24px;
-  color: #4a9eff;
+  color: var(--accent-primary);
 }
 
 .request-button {
-  background: linear-gradient(135deg, #4a9eff 0%, #2d7eff 100%);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -52,18 +54,18 @@
 }
 
 .request-button:disabled {
-  background: #e8e8e8;
+  background: var(--text-muted);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
 .search-form {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-tertiary);
   border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  box-shadow: 0 8px 32px 0 var(--shadow-medium);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--border-color);
   padding: 2rem;
   margin-bottom: 2rem;
   transition: all 0.3s ease;
@@ -71,17 +73,18 @@
 
 .search-form:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+  box-shadow: 0 12px 40px 0 var(--shadow-heavy);
 }
 
 .search-button {
-  background: linear-gradient(45deg, #4a9eff, #6366f1);
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
   border: none;
   padding: 12px 24px;
   border-radius: 12px;
   font-weight: 600;
   transition: all 0.3s ease;
   margin-top: 1rem;
+  color: white;
 }
 
 .search-button:hover {
@@ -91,7 +94,7 @@
 
 .trip-card {
   margin-bottom: 1.5rem;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-tertiary);
 }
 
 .trip-header h5 {
@@ -101,7 +104,7 @@
 }
 
 .trip-content {
-  background: white;
+  background: var(--bg-primary);
 }
 
 .trip-info-item {
@@ -109,17 +112,17 @@
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
-  color: #4b5563;
+  color: var(--text-secondary);
 }
 
 .trip-info-label {
   font-weight: 500;
-  color: #6b7280;
+  color: var(--text-muted);
   min-width: 100px;
 }
 
 .queue-info {
-  color: #2563eb;
+  color: var(--accent-primary);
   font-weight: 500;
   background: rgba(37, 99, 235, 0.1);
   padding: 4px 8px;
@@ -129,7 +132,7 @@
 }
 
 .queue-count {
-  color: #1e40af;
+  color: var(--accent-secondary);
   font-weight: 600;
 }
 
