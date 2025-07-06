@@ -29,12 +29,6 @@ export const ThemeProvider = ({ children }) => {
     const root = document.documentElement;
     const body = document.body;
     
-    // Force a reflow to ensure changes are applied immediately
-    const forceReflow = () => {
-      body.offsetHeight;
-      root.offsetHeight;
-    };
-    
     if (isDarkMode) {
       root.setAttribute('data-theme', 'dark');
       body.classList.add('dark-theme');
@@ -49,15 +43,6 @@ export const ThemeProvider = ({ children }) => {
       // Force update of CSS variables
       body.style.setProperty('--bg-primary', '#ffffff');
       body.style.setProperty('--text-primary', '#2d3748');
-    }
-    
-    // Force reflow on mobile devices
-    if (window.innerWidth <= 768) {
-      forceReflow();
-      // Additional mobile-specific updates
-      setTimeout(() => {
-        forceReflow();
-      }, 100);
     }
   }, [isDarkMode]);
 
