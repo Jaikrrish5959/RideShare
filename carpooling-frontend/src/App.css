@@ -79,6 +79,14 @@ label, td, th, li, a, small,
   color: var(--text-primary) !important;
 }
 
+/* General alert styling that works with themes */
+.alert {
+  border-radius: 8px !important;
+  border-width: 1px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+}
+
 /* Override Bootstrap's muted classes with theme colors */
 .text-muted,
 .text-muted *,
@@ -130,6 +138,37 @@ small.text-secondary {
   color: var(--text-primary) !important;
 }
 
+/* Bootstrap Alert overrides for dark theme */
+[data-theme="dark"] .alert {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .alert-info {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+  border-color: var(--accent-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .alert-danger {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  border-color: var(--danger-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .alert-success {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  border-color: var(--success-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .alert-warning {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  border-color: var(--warning-color) !important;
+  color: var(--text-primary) !important;
+}
+
 /* Bootstrap Tabs Dark Theme Overrides */
 [data-theme="dark"] .nav-tabs {
   border-bottom-color: var(--border-color) !important;
@@ -172,6 +211,37 @@ small.text-secondary {
 [data-theme="light"] .nav-tabs .nav-link.active {
   color: var(--text-primary) !important;
   background-color: var(--bg-primary) !important;
+}
+
+/* Light theme alert overrides for consistency */
+[data-theme="light"] .alert {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .alert-info {
+  background-color: rgba(99, 102, 241, 0.1) !important;
+  border-color: var(--accent-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .alert-danger {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  border-color: var(--danger-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .alert-success {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  border-color: var(--success-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .alert-warning {
+  background-color: rgba(245, 158, 11, 0.1) !important;
+  border-color: var(--warning-color) !important;
+  color: var(--text-primary) !important;
 }
 
 /* Mobile specific overrides */
