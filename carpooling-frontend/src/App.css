@@ -130,93 +130,48 @@ small.text-secondary {
   color: var(--text-primary) !important;
 }
 
-[data-theme="dark"] .card *,
-[data-theme="dark"] .card .text-muted,
-[data-theme="dark"] .card small {
+/* Bootstrap Tabs Dark Theme Overrides */
+[data-theme="dark"] .nav-tabs {
+  border-bottom-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .nav-tabs .nav-link {
+  color: var(--text-secondary) !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+[data-theme="dark"] .nav-tabs .nav-link:hover {
   color: var(--text-primary) !important;
-}
-
-[data-theme="dark"] .card .text-muted {
-  color: var(--text-muted) !important;
-}
-
-[data-theme="dark"] .form-control {
   background-color: var(--bg-secondary) !important;
   border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .nav-tabs .nav-link.active {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-primary) !important;
+  border-color: var(--border-color) var(--border-color) var(--bg-primary) !important;
+}
+
+[data-theme="dark"] .tab-content {
+  background-color: var(--bg-primary) !important;
   color: var(--text-primary) !important;
 }
 
-[data-theme="dark"] .form-control:focus {
+/* Light theme tab overrides for consistency */
+[data-theme="light"] .nav-tabs .nav-link {
+  color: var(--text-secondary) !important;
+  background-color: transparent !important;
+}
+
+[data-theme="light"] .nav-tabs .nav-link:hover {
+  color: var(--text-primary) !important;
   background-color: var(--bg-secondary) !important;
-  border-color: var(--accent-primary) !important;
+}
+
+[data-theme="light"] .nav-tabs .nav-link.active {
   color: var(--text-primary) !important;
-  box-shadow: 0 0 0 0.2rem rgba(99, 179, 237, 0.25) !important;
-}
-
-[data-theme="dark"] .form-control::placeholder {
-  color: var(--text-muted) !important;
-}
-
-[data-theme="dark"] .btn-primary {
-  background-color: var(--accent-primary) !important;
-  border-color: var(--accent-primary) !important;
-}
-
-[data-theme="dark"] .btn-primary:hover {
-  background-color: var(--accent-secondary) !important;
-  border-color: var(--accent-secondary) !important;
-}
-
-[data-theme="dark"] .alert-danger {
-  background-color: rgba(252, 129, 129, 0.1) !important;
-  border-color: var(--danger-color) !important;
-  color: var(--danger-color) !important;
-}
-
-[data-theme="dark"] .alert-success {
-  background-color: rgba(104, 211, 145, 0.1) !important;
-  border-color: var(--success-color) !important;
-  color: var(--success-color) !important;
-}
-
-[data-theme="dark"] .alert-info {
-  background-color: rgba(99, 179, 237, 0.1) !important;
-  border-color: var(--accent-primary) !important;
-  color: var(--accent-primary) !important;
-}
-
-/* Light theme text overrides with higher specificity */
-[data-theme="light"] *,
-[data-theme="light"] .text-muted,
-[data-theme="light"] small {
-  color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .text-muted,
-[data-theme="light"] small.text-muted {
-  color: var(--text-muted) !important;
-}
-
-[data-theme="light"] .text-secondary,
-[data-theme="light"] small.text-secondary {
-  color: var(--text-secondary) !important;
-}
-
-/* Dark theme text overrides with higher specificity */
-[data-theme="dark"] *,
-[data-theme="dark"] .text-muted,
-[data-theme="dark"] small {
-  color: var(--text-primary) !important;
-}
-
-[data-theme="dark"] .text-muted,
-[data-theme="dark"] small.text-muted {
-  color: var(--text-muted) !important;
-}
-
-[data-theme="dark"] .text-secondary,
-[data-theme="dark"] small.text-secondary {
-  color: var(--text-secondary) !important;
+  background-color: var(--bg-primary) !important;
 }
 
 /* Mobile specific overrides */
@@ -226,16 +181,33 @@ small.text-secondary {
     font-size: 16px !important;
   }
 
-  /* Force larger touch targets */
-  .btn, 
-  .form-control,
-  .nav-link,
-  select,
-  input {
+  /* Force theme variables to be applied on mobile */
+  body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+  }
+
+  /* Ensure theme toggle works on mobile */
+  .theme-toggle {
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+  }
+
+  /* Fix tab styling on mobile */
+  .nav-tabs {
+    border-bottom: 1px solid var(--border-color) !important;
+  }
+
+  .nav-tabs .nav-link {
     font-size: 16px !important;
-    min-height: 44px !important;
-    line-height: 1.3 !important;
-    padding: 12px !important;
+    padding: 12px 16px !important;
+    color: var(--text-secondary) !important;
+  }
+
+  .nav-tabs .nav-link.active {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-primary) !important;
+    border-color: var(--border-color) var(--border-color) var(--bg-primary) !important;
   }
 
   /* Ensure readable text */

@@ -6,6 +6,8 @@
   border-radius: 20px;
   transition: all 0.3s ease;
   margin-left: 10px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .theme-toggle:hover {
@@ -50,17 +52,28 @@
 @media screen and (max-width: 768px) {
   .theme-toggle {
     margin: 0.5rem 0;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    cursor: pointer !important;
   }
   
   .theme-toggle-track {
     width: 60px;
     height: 32px;
+    border: 2px solid var(--toggle-border);
+    background: var(--toggle-track-bg);
   }
   
   .theme-toggle-thumb {
     width: 28px;
     height: 28px;
     font-size: 14px;
+    background: var(--toggle-thumb-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .theme-toggle-thumb.light {
+    transform: translateX(2px);
   }
   
   .theme-toggle-thumb.dark {
