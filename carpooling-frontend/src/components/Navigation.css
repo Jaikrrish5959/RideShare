@@ -1,9 +1,15 @@
 .modern-navbar {
-  background: var(--bg-tertiary);
+  background: var(--bg-tertiary) !important;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 10px var(--shadow-light);
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
+  border-bottom: 1px solid var(--border-color);
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1030 !important;
 }
 
 .nav-link {

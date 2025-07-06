@@ -27,10 +27,16 @@ export const ThemeProvider = ({ children }) => {
     
     // Update CSS custom properties
     const root = document.documentElement;
+    const body = document.body;
+    
     if (isDarkMode) {
       root.setAttribute('data-theme', 'dark');
+      body.classList.add('dark-theme');
+      body.classList.remove('light-theme');
     } else {
       root.setAttribute('data-theme', 'light');
+      body.classList.add('light-theme');
+      body.classList.remove('dark-theme');
     }
   }, [isDarkMode]);
 

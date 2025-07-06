@@ -49,20 +49,44 @@
   --toggle-border: #718096;
 }
 
-/* Apply theme colors to body */
+/* Apply theme colors to body and all text elements */
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
 
+/* Ensure all text elements inherit theme colors */
+* {
+  color: inherit;
+  -webkit-text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Specific text element overrides */
+p, span, div, h1, h2, h3, h4, h5, h6, 
+label, td, th, li, a, small, 
+.text-muted, .text-secondary {
+  color: var(--text-primary) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+/* Fix navbar gap */
 .main-content {
-  margin-top: 70px;
+  margin-top: 60px !important;
   padding: 20px;
-  background-color: var(--bg-primary);
-  min-height: calc(100vh - 70px);
+  background-color: var(--bg-primary) !important;
+  min-height: calc(100vh - 60px) !important;
   transition: background-color 0.3s ease;
 }
 
@@ -77,6 +101,10 @@ body {
 [data-theme="dark"] .card {
   background-color: var(--bg-secondary) !important;
   border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .card * {
   color: var(--text-primary) !important;
 }
 
@@ -125,6 +153,19 @@ body {
   color: var(--accent-primary) !important;
 }
 
+/* Light theme text overrides */
+[data-theme="light"] * {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .text-muted {
+  color: var(--text-muted) !important;
+}
+
+[data-theme="light"] .text-secondary {
+  color: var(--text-secondary) !important;
+}
+
 /* Mobile specific overrides */
 @media screen and (max-width: 768px) {
   /* Ensure consistent base size */
@@ -160,7 +201,7 @@ body {
     padding-right: 15px !important;
   }
 
-  /* Fix main content spacing */
+  /* Fix main content spacing for mobile */
   .main-content {
     margin-top: 56px !important;
     padding: 15px !important;
