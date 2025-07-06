@@ -124,10 +124,10 @@ const Settings = ({ user, onUserUpdate }) => {
       
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="username">
-          <Form.Label>Username</Form.Label>
+          <Form.Label>Full Name</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter username"
+            placeholder="Enter full name"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             minLength={3}
