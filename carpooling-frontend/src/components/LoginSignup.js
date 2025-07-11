@@ -98,6 +98,7 @@ const LoginSignup = ({ onLogin }) => {
                 <Button
                   variant="link"
                   onClick={() => setIsLogin(!isLogin)}
+                  style={{ color: '#000', textDecoration: 'none' }}
                 >
                   {isLogin ? 'Need an account? Sign up' : 'Already have an account? Login'}
                 </Button>
@@ -105,6 +106,7 @@ const LoginSignup = ({ onLogin }) => {
                   <Button
                     variant="link"
                     onClick={handleResendVerification}
+                    style={{ color: '#000', textDecoration: 'none' }}
                   >
                     Resend verification email
                   </Button>
@@ -118,4 +120,4 @@ const LoginSignup = ({ onLogin }) => {
   );
 };
 
-export default LoginSignup; 
+export default LoginSignup;
