@@ -37,6 +37,9 @@ export const ThemeProvider = ({ children }) => {
       body.style.setProperty('--bg-primary', '#1a202c');
       body.style.setProperty('--text-primary', '#f7fafc');
       body.style.setProperty('--button-text', '#ffffff');
+      body.style.setProperty('--link-color', '#4299e1');
+      body.style.setProperty('--link-hover-color', '#63b3ed');
+      body.style.setProperty('--accent-primary', '#4299e1');
     } else {
       root.setAttribute('data-theme', 'light');
       body.classList.add('light-theme');
@@ -45,6 +48,9 @@ export const ThemeProvider = ({ children }) => {
       body.style.setProperty('--bg-primary', '#ffffff');
       body.style.setProperty('--text-primary', '#2d3748');
       body.style.setProperty('--button-text', '#ffffff');
+      body.style.setProperty('--link-color', '#2b6cb0');
+      body.style.setProperty('--link-hover-color', '#2c5282');
+      body.style.setProperty('--accent-primary', '#2b6cb0');
     }
   }, [isDarkMode]);
 

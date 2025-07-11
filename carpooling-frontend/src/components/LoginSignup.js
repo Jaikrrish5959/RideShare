@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
+import { useTheme } from '../contexts/ThemeContext';
 import './Home.css';
 import './LoginSignup.css';
 
 const LoginSignup = ({ onLogin }) => {
+  const { isDarkMode } = useTheme();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -100,6 +102,10 @@ const LoginSignup = ({ onLogin }) => {
                   variant="link"
                   onClick={() => setIsLogin(!isLogin)}
                   className="theme-link"
+                  style={{
+                    color: 'var(--link-color)',
+                    textDecoration: 'none'
+                  }}
                 >
                   {isLogin ? 'Need an account? Sign up' : 'Already have an account? Login'}
                 </Button>
@@ -108,6 +114,10 @@ const LoginSignup = ({ onLogin }) => {
                     variant="link"
                     onClick={handleResendVerification}
                     className="theme-link"
+                    style={{
+                      color: 'var(--link-color)',
+                      textDecoration: 'none'
+                    }}
                   >
                     Resend verification email
                   </Button>

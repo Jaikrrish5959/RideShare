@@ -76,33 +76,49 @@
 
 /* Theme-aware link styling */
 .theme-link {
-  color: var(--text-primary) !important;
+  color: var(--link-color, #2b6cb0) !important;
   text-decoration: none !important;
-  transition: color 0.3s ease !important;
+  transition: all 0.3s ease !important;
   font-weight: 500 !important;
 }
 
 .theme-link:hover {
-  color: var(--accent-primary) !important;
+  color: var(--link-hover-color, #2c5282) !important;
   text-decoration: underline !important;
 }
 
 .theme-link:focus {
-  color: var(--accent-primary) !important;
+  color: var(--link-hover-color, #2c5282) !important;
   text-decoration: underline !important;
 }
 
-/* Override Bootstrap's btn-link styling */
+/* Override Bootstrap's btn-link styling completely */
 .btn-link.theme-link {
   border: none !important;
   padding: 0.375rem 0 !important;
   background: transparent !important;
   box-shadow: none !important;
+  color: var(--link-color, #2b6cb0) !important;
 }
 
 .btn-link.theme-link:hover,
-.btn-link.theme-link:focus {
+.btn-link.theme-link:focus,
+.btn-link.theme-link:active {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
+  color: var(--link-hover-color, #2c5282) !important;
+}
+
+/* Dark theme specific overrides */
+[data-theme="dark"] .theme-link,
+.dark-theme .theme-link {
+  color: var(--link-color, #4299e1) !important;
+}
+
+[data-theme="dark"] .theme-link:hover,
+[data-theme="dark"] .theme-link:focus,
+.dark-theme .theme-link:hover,
+.dark-theme .theme-link:focus {
+  color: var(--link-hover-color, #63b3ed) !important;
 }
