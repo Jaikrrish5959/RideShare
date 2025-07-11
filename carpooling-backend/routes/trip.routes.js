@@ -10,6 +10,7 @@ const { sequelize } = require('../config/db.config');
 const emailService = require('../services/email.service');
 const { tripValidation } = require('../middleware/tripValidation');
 const { cache, cacheHelpers } = require('../utils/cache');
+const logger = require('../utils/logger');
 
 // Cache key generators
 const generateTripCacheKey = (query) => {
@@ -123,7 +124,7 @@ router.get('/', auth, async (req, res) => {
     // Try to get from cache first
     const cachedTrips = cache.get(cacheKey);
     if (cachedTrips) {
-      logger.info('Trips cache hit', { cacheKey });
+      console.log('Trips cache hit', { cacheKey });
       return res.json(cachedTrips);
     }
 
@@ -168,7 +169,7 @@ router.get('/', auth, async (req, res) => {
 
     // Cache for 2 minutes (trips data changes frequently)
     cache.set(cacheKey, tripsWithCount, 120);
-    logger.info('Trips cached', { cacheKey, count: tripsWithCount.length });
+    console.log('Trips cached', { cacheKey, count: tripsWithCount.length });
 
     res.json(tripsWithCount);
   } catch (error) {
@@ -600,7 +601,7 @@ router.get('/my-trips', auth, async (req, res) => {
     // Try cache first
     const cachedTrips = cache.get(cacheKey);
     if (cachedTrips) {
-      logger.info('User trips cache hit', { userId, cacheKey });
+      console.log('User trips cache hit', { userId, cacheKey });
       return res.json(cachedTrips);
     }
 
@@ -647,7 +648,7 @@ router.get('/my-trips', auth, async (req, res) => {
 
     // Cache user trips for 5 minutes
     cache.set(cacheKey, allTrips, 300);
-    logger.info('User trips cached', { userId, cacheKey, count: allTrips.length });
+    console.log('User trips cached', { userId, cacheKey, count: allTrips.length });
 
     res.json(allTrips);
   } catch (error) {

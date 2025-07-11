@@ -134,10 +134,6 @@ instance.interceptors.response.use(
   },
   (error) => {
     console.error('Axios response error:', error);
-    console.error('Response data:', error.response?.data);
-    console.error('Response status:', error.response?.status);
-    console.error('Request URL:', error.config?.url);
-    
     if (error.response?.status === 401) {
       localStorage.clear();
       sessionStorage.clear();

@@ -29,8 +29,6 @@ const SearchTrips = () => {
           return;
         }
         
-        console.log('Fetching trips with token:', token ? 'Present' : 'Missing');
-        
         const response = await axios.get('/api/trips', {
           headers: {
             Authorization: `Bearer ${token}`
@@ -44,9 +42,7 @@ const SearchTrips = () => {
       } catch (error) {
         if (mounted) {
           console.error('Error fetching trips:', error);
-          console.error('Error response:', error.response?.data);
-          console.error('Error status:', error.response?.status);
-          setError(error.response?.data?.message || 'Failed to fetch trips. Please try again.');
+          setError(error.response?.data?.message || 'Failed to fetch trips');
         }
       } finally {
         if (mounted) {
@@ -136,8 +132,6 @@ const SearchTrips = () => {
       if (destination) params.destination = destination;
       if (date) params.date = date;
 
-      console.log('Searching trips with params:', params);
-
       const response = await axios.get('/api/trips', {
         params,
         headers: {
@@ -149,9 +143,7 @@ const SearchTrips = () => {
       setTrips(currentTrips);
     } catch (error) {
       console.error('Error searching trips:', error);
-      console.error('Error response:', error.response?.data);
-      console.error('Error status:', error.response?.status);
-      setError(error.response?.data?.message || 'Failed to search trips. Please try again.');
+      setError(error.response?.data?.message || 'Failed to search trips');
     } finally {
       setLoading(false);
     }
