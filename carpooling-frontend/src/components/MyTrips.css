@@ -30,128 +30,188 @@
 
 .trip-card {
   background: var(--bg-primary);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px var(--shadow-light);
-  transition: all 0.3s ease;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px var(--shadow-light);
+  transition: all 0.4s ease;
   border: 1px solid var(--border-color);
   overflow: hidden;
+  position: relative;
 }
 
 .trip-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px var(--shadow-medium);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 48px var(--shadow-medium);
+  border-color: var(--accent-primary);
 }
 
 .trip-header {
   background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   color: white;
-  padding: 1.5rem;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.trip-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .trip-title {
   color: white !important;
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 700;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.trip-title::before {
+  content: '🚗';
+  font-size: 1.25rem;
 }
 
 .trip-badge {
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: 25px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .owner-badge {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
 }
 
 .participant-badge {
   background: rgba(16, 185, 129, 0.2);
   color: white;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-color: rgba(16, 185, 129, 0.4);
 }
 
 .past-badge {
   background: var(--text-muted);
   color: white;
+  border-color: transparent;
 }
 
 .trip-content {
-  padding: 1.5rem;
+  padding: 2rem;
   background: var(--bg-primary);
   color: var(--text-primary);
 }
 
 .trip-info-grid {
   display: grid;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .trip-info-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border-left: 4px solid var(--accent-primary);
+  transition: all 0.3s ease;
 }
 
-.trip-info-item:last-child {
-  border-bottom: none;
+.trip-info-item:hover {
+  transform: translateX(4px);
+  background: var(--bg-tertiary);
 }
 
 .trip-info-label {
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .trip-info-value {
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .queue-count {
-  color: var(--accent-primary);
-  background: rgba(74, 158, 255, 0.1);
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.queue-count::before {
+  content: '👥';
 }
 
 .trip-actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .action-button {
-  flex: 1;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 1.5rem;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1.125rem;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .edit-button {
   background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  color: white;
+  color: white !important;
 }
 
 .delete-button {
   background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
-  color: white;
+  color: white !important;
+}
+
+.action-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.action-button:hover::before {
+  left: 100%;
 }
 
 .action-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .trip-status {
@@ -274,30 +334,37 @@
   }
 
   .trip-card {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
   }
 
   .trip-header {
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .trip-title {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
   .trip-content {
-    padding: 1rem;
+    padding: 1.5rem;
+  }
+
+  .trip-info-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .trip-actions {
-    flex-direction: column;
-    gap: 0.5rem;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .action-button {
     font-size: 1.1rem;
     padding: 0.875rem;
-    min-height: 48px;
+    min-height: 52px;
+    border-radius: 12px;
   }
 
   .modern-input {

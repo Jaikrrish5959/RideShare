@@ -119,35 +119,50 @@ const RideRequests = ({ user }) => {
 
   const renderIncomingRequests = () => (
     requests.incoming.map(request => (
-      <Card key={request.id} className="mb-3">
-        <Card.Body>
-          <Card.Title>
+      <Card key={request.id} className="mb-3 trip-card">
+        <div className="trip-header">
+          <Card.Title className="trip-title">
             {request.Trip.start_point} → {request.Trip.destination}
           </Card.Title>
-          <Card.Text>
-            Date: {request.Trip.date}<br />
-            Time: {request.Trip.time}<br />
-            Passenger: {request.requester?.username || request.requester?.email || 'Unknown'}<br />
-            Phone: {request.requester?.phoneNumber ? 
-              request.requester.phoneNumber.replace(/(\d{5})(\d{5})/, '$1 $2') : 
-              'Not provided'}<br />
-            Status: <span className={`fw-bold text-${getStatusColor(request.status)}`}>
-              {request.status.toUpperCase()}
-            </span>
-          </Card.Text>
+        </div>
+        <div className="trip-content">
+          <div className="trip-info-grid">
+            <div className="trip-info-item">
+              <span className="trip-info-label">Date</span>
+              <span className="trip-info-value">{request.Trip.date}</span>
+            </div>
+            <div className="trip-info-item">
+              <span className="trip-info-label">Time</span>
+              <span className="trip-info-value">{request.Trip.time}</span>
+            </div>
+            <div className="trip-info-item">
+              <span className="trip-info-label">Passenger</span>
+              <span className="trip-info-value">{request.requester?.username || request.requester?.email || 'Unknown'}</span>
+            </div>
+            <div className="trip-info-item">
+              <span className="trip-info-label">Phone</span>
+              <span className="trip-info-value">{request.requester?.phoneNumber ? 
+                request.requester.phoneNumber.replace(/(\d{5})(\d{5})/, '$1 $2') : 
+                'Not provided'}</span>
+            </div>
+            <div className="trip-info-item">
+              <span className="trip-info-label">Status</span>
+              <span className={`trip-info-value fw-bold text-${getStatusColor(request.status)}`}>
+                {request.status.toUpperCase()}
+              </span>
+            </div>
+          </div>
           {request.status === 'pending' && (
-            <div className="d-flex gap-2">
+            <div className="trip-actions">
               <Button 
-                variant="success" 
-                size="sm" 
+                className="action-button edit-button"
                 onClick={() => handleRequestUpdate(request.id, 'accepted')}
                 disabled={updatingRequests[request.id]}
               >
                 Accept
               </Button>
               <Button 
-                variant="danger" 
-                size="sm" 
+                className="action-button delete-button"
                 onClick={() => handleRequestUpdate(request.id, 'rejected')}
                 disabled={updatingRequests[request.id]}
               >
@@ -155,35 +170,49 @@ const RideRequests = ({ user }) => {
               </Button>
             </div>
           )}
-        </Card.Body>
+        </div>
       </Card>
     ))
   );
 
   const renderOutgoingRequests = () => (
     requests.outgoing.map(request => (
-      <Card key={request.id} className="mb-3">
-        <Card.Body>
-          <Card.Title>
+      <Card key={request.id} className="mb-3 trip-card">
+        <div className="trip-header">
+          <Card.Title className="trip-title">
             {request.Trip.start_point} → {request.Trip.destination}
           </Card.Title>
-          <Card.Text>
-            Date: {request.Trip.date}<br />
-            Time: {request.Trip.time}<br />
-            Host: {request.Trip.User?.username || request.Trip.User?.email || 'Unknown'}<br />
-            Status: <span className={`fw-bold text-${getStatusColor(request.status)}`}>
-              {request.status.toUpperCase()}
-            </span>
+        </div>
+        <div className="trip-content">
+          <div className="trip-info-grid">
+            <div className="trip-info-item">
+              <span className="trip-info-label">Date</span>
+              <span className="trip-info-value">{request.Trip.date}</span>
+            </div>
+            <div className="trip-info-item">
+              <span className="trip-info-label">Time</span>
+              <span className="trip-info-value">{request.Trip.time}</span>
+            </div>
+            <div className="trip-info-item">
+              <span className="trip-info-label">Host</span>
+              <span className="trip-info-value">{request.Trip.User?.username || request.Trip.User?.email || 'Unknown'}</span>
+            </div>
+            <div className="trip-info-item">
+              <span className="trip-info-label">Status</span>
+              <span className={`trip-info-value fw-bold text-${getStatusColor(request.status)}`}>
+                {request.status.toUpperCase()}
+              </span>
+            </div>
             {request.status === 'accepted' && (
-              <>
-                <br />Contact Details:<br />
-                Phone: {request.Trip.User?.phoneNumber ? 
+              <div className="trip-info-item">
+                <span className="trip-info-label">Contact Phone</span>
+                <span className="trip-info-value">{request.Trip.User?.phoneNumber ? 
                   request.Trip.User.phoneNumber.replace(/(\d{5})(\d{5})/, '$1 $2') : 
-                  'Not provided'}
-              </>
+                  'Not provided'}</span>
+              </div>
             )}
-          </Card.Text>
-        </Card.Body>
+          </div>
+        </div>
       </Card>
     ))
   );
@@ -200,38 +229,49 @@ const RideRequests = ({ user }) => {
         }
 
         return (
-          <Card key={request.id} className="mb-3">
-            <Card.Body>
-              <Card.Title>
+          <Card key={request.id} className="mb-3 trip-card">
+            <div className="trip-header">
+              <Card.Title className="trip-title">
                 {request.Trip.start_point} → {request.Trip.destination}
               </Card.Title>
-              <Card.Text>
-                Date: {request.Trip.date}<br />
-                Time: {request.Trip.time}<br />
-                Status: <span className={`fw-bold text-${getStatusColor(request.status)}`}>
-                  {request.status.toUpperCase()}
-                </span><br />
-                {isIncoming ? (
-                  <>Passenger: {request.requester?.username || request.requester?.email || 'Unknown'}<br /></>
-                ) : (
-                  <>Host: {request.Trip.User?.username || request.Trip.User?.email || 'Unknown'}<br /></>
-                )}
+              <span className="trip-badge past-badge">Past Trip</span>
+            </div>
+            <div className="trip-content">
+              <div className="trip-info-grid">
+                <div className="trip-info-item">
+                  <span className="trip-info-label">Date</span>
+                  <span className="trip-info-value">{request.Trip.date}</span>
+                </div>
+                <div className="trip-info-item">
+                  <span className="trip-info-label">Time</span>
+                  <span className="trip-info-value">{request.Trip.time}</span>
+                </div>
+                <div className="trip-info-item">
+                  <span className="trip-info-label">Status</span>
+                  <span className={`trip-info-value fw-bold text-${getStatusColor(request.status)}`}>
+                    {request.status.toUpperCase()}
+                  </span>
+                </div>
+                <div className="trip-info-item">
+                  <span className="trip-info-label">{isIncoming ? 'Passenger' : 'Host'}</span>
+                  <span className="trip-info-value">
+                    {isIncoming ? 
+                      (request.requester?.username || request.requester?.email || 'Unknown') :
+                      (request.Trip.User?.username || request.Trip.User?.email || 'Unknown')}
+                  </span>
+                </div>
                 {request.status === 'accepted' && (
-                  <>
-                    Contact Details:<br />
-                    {isIncoming ? (
-                      <>
-                        Phone: {request.requester?.phoneNumber || 'Not provided'}<br />
-                      </>
-                    ) : (
-                      <>
-                        Phone: {request.Trip.User?.phoneNumber || 'Not provided'}<br />
-                      </>
-                    )}
-                  </>
+                  <div className="trip-info-item">
+                    <span className="trip-info-label">Contact Phone</span>
+                    <span className="trip-info-value">
+                      {isIncoming ? 
+                        (request.requester?.phoneNumber || 'Not provided') :
+                        (request.Trip.User?.phoneNumber || 'Not provided')}
+                    </span>
+                  </div>
                 )}
-              </Card.Text>
-            </Card.Body>
+              </div>
+            </div>
           </Card>
         );
       } catch (error) {
@@ -286,4 +326,4 @@ const RideRequests = ({ user }) => {
   );
 };
 
-export default RideRequests; 
+export default RideRequests;
