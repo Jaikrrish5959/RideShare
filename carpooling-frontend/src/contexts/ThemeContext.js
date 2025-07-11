@@ -36,6 +36,7 @@ export const ThemeProvider = ({ children }) => {
       // Force update of CSS variables
       body.style.setProperty('--bg-primary', '#1a202c');
       body.style.setProperty('--text-primary', '#f7fafc');
+      body.style.setProperty('--button-text', '#ffffff');
     } else {
       root.setAttribute('data-theme', 'light');
       body.classList.add('light-theme');
@@ -43,6 +44,7 @@ export const ThemeProvider = ({ children }) => {
       // Force update of CSS variables
       body.style.setProperty('--bg-primary', '#ffffff');
       body.style.setProperty('--text-primary', '#2d3748');
+      body.style.setProperty('--button-text', '#ffffff');
     }
   }, [isDarkMode]);
 

@@ -16,6 +16,7 @@
   --success-color: #10b981;
   --danger-color: #ef4444;
   --warning-color: #f59e0b;
+  --button-text: #ffffff;
   
   /* Toggle colors */
   --toggle-track-bg: #e5e7eb;
@@ -42,6 +43,7 @@
   --success-color: #68d391;
   --danger-color: #fc8181;
   --warning-color: #f6e05e;
+  --button-text: #ffffff;
   
   /* Toggle colors */
   --toggle-track-bg: #4a5568;
@@ -344,4 +346,88 @@ html {
 body {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+}
+
+/* Force all buttons to use white text */
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info,
+.btn-light,
+.btn-dark,
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-success,
+.btn-outline-danger,
+.btn-outline-warning,
+.btn-outline-info,
+.btn-outline-light,
+.btn-outline-dark,
+button,
+input[type="submit"],
+input[type="button"],
+.submit-button,
+.search-button,
+.request-button,
+.action-button,
+.modern-button,
+.seats-button {
+  color: var(--button-text) !important;
+}
+
+/* Ensure Bootstrap button hover states keep white text */
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-success:hover,
+.btn-danger:hover,
+.btn-warning:hover,
+.btn-info:hover,
+.btn-light:hover,
+.btn-dark:hover,
+.btn:focus,
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-success:focus,
+.btn-danger:focus,
+.btn-warning:focus,
+.btn-info:focus,
+.btn-light:focus,
+.btn-dark:focus,
+.btn:active,
+.btn-primary:active,
+.btn-secondary:active,
+.btn-success:active,
+.btn-danger:active,
+.btn-warning:active,
+.btn-info:active,
+.btn-light:active,
+.btn-dark:active {
+  color: var(--button-text) !important;
+}
+
+/* Special handling for outline buttons */
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-success,
+.btn-outline-danger,
+.btn-outline-warning,
+.btn-outline-info,
+.btn-outline-light,
+.btn-outline-dark {
+  color: var(--text-primary) !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover,
+.btn-outline-success:hover,
+.btn-outline-danger:hover,
+.btn-outline-warning:hover,
+.btn-outline-info:hover,
+.btn-outline-light:hover,
+.btn-outline-dark:hover {
+  color: var(--button-text) !important;
 }
