@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'sharerides-api'
+    static_configs:
+      - targets: ['api:10000']
+    metrics_path: '/api/metrics'
+    headers:
+      X-Internal-Request: 'true'
+    scrape_interval: 30s

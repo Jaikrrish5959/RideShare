@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
 const User = require('../models/user.model');
+const logger = require('../utils/logger');
+const metrics = require('../utils/metrics');
 require('dotenv').config();
 
 // Create reusable transporter with secure settings
@@ -51,7 +53,8 @@ setInterval(() => {
 
 const emailService = {
   sendVerificationEmail: async (email, verificationToken) => {
-    console.log('Sending verification email to:', email);
+    const startTime = Date.now();
+    logger.info('Sending verification email', { email, operation: 'verification' });
     
     const verificationLink = `${process.env.FRONTEND_URL}/#/verify-email?token=${verificationToken}`;
     
@@ -85,9 +88,21 @@ const emailService = {
     try {
       emailQueue.push(mailOptions);
       await processEmailQueue();
-      console.log('Verification email queued:', email);
+      
+      const duration = Date.now() - startTime;
+      logger.logEmail('verification_email', email, true);
+      metrics.recordEmail(true);
+      logger.info('Verification email queued successfully', { 
+        email, 
+        duration: `${duration}ms` 
+      });
     } catch (error) {
-      console.error('Email sending error:', {
+      const duration = Date.now() - startTime;
+      logger.logEmail('verification_email', email, false, error);
+      metrics.recordEmail(false);
+      logger.error('Email sending error', {
+        email,
+        duration: `${duration}ms`,
         message: error.message,
         code: error.code,
         command: error.command
@@ -101,6 +116,11 @@ const emailService = {
       try {
         return await operation();
       } catch (error) {
+        logger.warn('Email retry attempt', { 
+          attempt: i + 1, 
+          maxRetries, 
+          error: error.message 
+        });
         if (i === maxRetries - 1) throw error;
         await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, i)));
       }
@@ -108,9 +128,20 @@ const emailService = {
   },
 
   sendRideRequestUpdate: async (userId, status, message) => {
+    const startTime = Date.now();
     try {
       const user = await User.findByPk(userId);
-      if (!user || !user.email) return;
+      if (!user || !user.email) {
+        logger.warn('User not found for ride request update', { userId });
+        return;
+      }
+
+      logger.info('Sending ride request update', { 
+        userId, 
+        email: user.email, 
+        status, 
+        operation: 'ride_request_update' 
+      });
 
       await emailService.retryOperation(async () => {
         const mailOptions = {
@@ -145,8 +176,26 @@ const emailService = {
         emailQueue.push(mailOptions);
         await processEmailQueue();
       });
+
+      const duration = Date.now() - startTime;
+      logger.logEmail('ride_request_update', user.email, true);
+      metrics.recordEmail(true);
+      logger.info('Ride request update email sent', { 
+        userId, 
+        email: user.email, 
+        status, 
+        duration: `${duration}ms` 
+      });
     } catch (error) {
-      console.error('Error sending ride request update email:', error);
+      const duration = Date.now() - startTime;
+      logger.logEmail('ride_request_update', null, false, error);
+      metrics.recordEmail(false);
+      logger.error('Error sending ride request update email', { 
+        userId, 
+        status, 
+        duration: `${duration}ms`,
+        error: error.message 
+      });
     }
   },
 
