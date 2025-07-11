@@ -15,6 +15,7 @@ const Settings = ({ user, onUserUpdate }) => {
   });
   const [passwordError, setPasswordError] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState('');
+  const [validationErrors, setValidationErrors] = useState({});
 
   // Load current settings from props instead of localStorage
   useEffect(() => {
@@ -31,18 +32,67 @@ const Settings = ({ user, onUserUpdate }) => {
     }
   }, [user]);
 
+  // Add validation function
+  const validateForm = () => {
+    const errors = {};
+    
+    // Name validation
+    if (username.trim().length < 3) {
+      errors.username = 'Full name must be at least 3 characters long';
+    } else if (username.trim().length > 30) {
+      errors.username = 'Full name must be less than 30 characters';
+    } else if (!/^[a-zA-Z\s]+$/.test(username.trim())) {
+      errors.username = 'Full name can only contain letters and spaces';
+    }
+    
+    // Phone number validation
+    if (phoneNumber && !/^[0-9]{10}$/.test(phoneNumber)) {
+      errors.phoneNumber = 'Phone number must be exactly 10 digits';
+    }
+    
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  // Add real-time validation
+  const handleUsernameChange = (e) => {
+    const value = e.target.value;
+    setUsername(value);
+    
+    // Clear validation error when user starts typing
+    if (validationErrors.username) {
+      setValidationErrors(prev => ({ ...prev, username: '' }));
+    }
+  };
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+    setPhoneNumber(value);
+    
+    // Clear validation error when user starts typing
+    if (validationErrors.phoneNumber) {
+      setValidationErrors(prev => ({ ...prev, phoneNumber: '' }));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
+    
     setLoading(true);
 
     try {
       const token = localStorage.getItem('token');
-      console.log('Sending settings update:', { username, phoneNumber });
+      console.log('Sending settings update:', { username: username.trim(), phoneNumber });
       
       const response = await axios.put('/api/user/settings', 
-        { username, phoneNumber },
+        { username: username.trim(), phoneNumber },
         {
           headers: { 
             Authorization: `Bearer ${token}`,
@@ -129,12 +179,16 @@ const Settings = ({ user, onUserUpdate }) => {
             type="text"
             placeholder="Enter full name"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            minLength={3}
-            maxLength={30}
+            onChange={handleUsernameChange}
+            onBlur={validateForm}
+            isInvalid={!!validationErrors.username}
+            required
           />
+          <Form.Control.Feedback type="invalid">
+            {validationErrors.username}
+          </Form.Control.Feedback>
           <Form.Text className="text-muted">
-            This name will be displayed to other users
+            This name will be displayed to other users (3-30 characters, letters and spaces only)
           </Form.Text>
         </Form.Group>
 
@@ -144,18 +198,24 @@ const Settings = ({ user, onUserUpdate }) => {
             type="tel"
             placeholder="Enter 10-digit phone number"
             value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            pattern="[0-9]{10}"
+            onChange={handlePhoneChange}
+            onBlur={validateForm}
+            isInvalid={!!validationErrors.phoneNumber}
+            maxLength={10}
+            required
           />
+          <Form.Control.Feedback type="invalid">
+            {validationErrors.phoneNumber}
+          </Form.Control.Feedback>
           <Form.Text className="text-muted">
-            Enter a 10-digit phone number
+            Enter a 10-digit phone number (numbers only)
           </Form.Text>
         </Form.Group>
 
         <Button 
           variant="primary" 
           type="submit"
-          disabled={loading}
+          disabled={loading || Object.keys(validationErrors).length > 0}
         >
           {loading ? 'Saving...' : 'Save Changes'}
         </Button>
@@ -218,4 +278,4 @@ const Settings = ({ user, onUserUpdate }) => {
   );
 };
 
-export default Settings; 
+export default Settings;

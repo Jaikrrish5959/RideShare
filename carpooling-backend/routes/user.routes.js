@@ -5,10 +5,19 @@ const User = require('../models/user.model');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
-// Validation middleware
+// Enhanced validation middleware
 const updateValidation = [
-  body('username').optional().trim().isLength({ min: 3, max: 30 }),
-  body('phoneNumber').optional().matches(/^[0-9]{10}$/).withMessage('Phone number must be 10 digits')
+  body('username')
+    .optional()
+    .trim()
+    .isLength({ min: 3, max: 30 })
+    .withMessage('Username must be between 3 and 30 characters')
+    .matches(/^[a-zA-Z\s]+$/)
+    .withMessage('Username can only contain letters and spaces'),
+  body('phoneNumber')
+    .optional()
+    .matches(/^[0-9]{10}$/)
+    .withMessage('Phone number must be exactly 10 digits')
 ];
 
 // Update user settings
@@ -25,13 +34,26 @@ router.put('/settings', auth, updateValidation, async (req, res) => {
     const { username, phoneNumber } = req.body;
     const userId = req.user.userId;
 
+    // Additional server-side validation
+    if (username && username.trim().length === 0) {
+      return res.status(400).json({ 
+        message: 'Username cannot be empty' 
+      });
+    }
+
+    if (phoneNumber && phoneNumber.length !== 10) {
+      return res.status(400).json({ 
+        message: 'Phone number must be exactly 10 digits' 
+      });
+    }
+
     const user = await User.findByPk(userId);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
     // Update only provided fields
-    if (username !== undefined) user.username = username;
+    if (username !== undefined) user.username = username.trim();
     if (phoneNumber !== undefined) user.phoneNumber = phoneNumber;
 
     await user.save();
@@ -52,7 +74,7 @@ router.put('/settings', auth, updateValidation, async (req, res) => {
   }
 });
 
-// Add this route to handle password changes
+// Change password route
 router.put('/change-password', auth, async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -83,4 +105,4 @@ router.put('/change-password', auth, async (req, res) => {
   }
 });
 
-module.exports = router; 
+module.exports = router;

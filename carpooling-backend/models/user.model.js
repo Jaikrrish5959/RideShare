@@ -14,6 +14,10 @@ const User = sequelize.define('User', {
   username: {
     type: DataTypes.STRING,
     allowNull: true,
+    validate: {
+      len: [3, 30],
+      is: /^[a-zA-Z\s]+$/
+    }
   },
   phoneNumber: {
     type: DataTypes.STRING,
@@ -59,4 +63,4 @@ User.prototype.validatePassword = async function(password) {
   }
 };
 
-module.exports = User; 
+module.exports = User;
