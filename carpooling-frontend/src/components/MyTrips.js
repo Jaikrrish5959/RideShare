@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card, Button, Alert, Form, Modal, Badge } from 'react-bootstrap';
 import axios from '../services/axiosConfig';
+import './MyTrips.css';
 
 const MyTrips = () => {
   const [trips, setTrips] = useState([]);
@@ -138,41 +139,58 @@ const MyTrips = () => {
   };
 
   const renderTrips = () => {
-    if (loading) return <div>Loading...</div>;
-    if (error) return <Alert variant="danger">{error}</Alert>;
-    if (!trips.length) return <Alert variant="info">No trips found</Alert>;
+    if (loading) return <div className="loading-container">Loading...</div>;
+    if (error) return <Alert variant="danger" className="modern-alert">{error}</Alert>;
+    if (!trips.length) return <Alert variant="info" className="modern-alert">No trips found</Alert>;
 
     return trips.map(trip => {
       const isPast = isPastTrip(trip);
       const pendingRequests = trip.RideRequests?.filter(r => r.status === 'pending').length || 0;
       
       return (
-        <Card key={trip.id} className="mb-3">
-          <Card.Body>
+        <Card key={trip.id} className="trip-card modern-card">
+          <div className="trip-header">
             <div className="d-flex justify-content-between align-items-start">
-              <Card.Title>{trip.start_point} → {trip.destination}</Card.Title>
+              <h5 className="trip-title">{trip.start_point} → {trip.destination}</h5>
               {trip.isOwner ? (
-                <Badge bg="primary">Your Trip</Badge>
+                <Badge className="trip-badge owner-badge">Your Trip</Badge>
               ) : (
-                <Badge bg="info">Participating</Badge>
+                <Badge className="trip-badge participant-badge">Participating</Badge>
               )}
             </div>
-            <Card.Text>
-              Date: {trip.date}<br />
-              Time: {trip.time}<br />
-              Available Seats: {trip.seats_available}<br />
-              {trip.isOwner && `Pending Requests: ${pendingRequests}`}
-            </Card.Text>
-            {!isPast && trip.isOwner && ( // Only show action buttons for non-past trips that user owns
-              <div className="d-flex gap-2">
+          </div>
+          <div className="trip-content">
+            <div className="trip-info-grid">
+              <div className="trip-info-item">
+                <span className="trip-info-label">Date:</span>
+                <span className="trip-info-value">{trip.date}</span>
+              </div>
+              <div className="trip-info-item">
+                <span className="trip-info-label">Time:</span>
+                <span className="trip-info-value">{trip.time}</span>
+              </div>
+              <div className="trip-info-item">
+                <span className="trip-info-label">Available Seats:</span>
+                <span className="trip-info-value">{trip.seats_available}</span>
+              </div>
+              {trip.isOwner && (
+                <div className="trip-info-item">
+                  <span className="trip-info-label">Pending Requests:</span>
+                  <span className="trip-info-value queue-count">{pendingRequests}</span>
+                </div>
+              )}
+            </div>
+            
+            {!isPast && trip.isOwner && (
+              <div className="trip-actions">
                 <Button 
-                  variant="primary" 
+                  className="action-button edit-button"
                   onClick={() => handleEdit(trip)}
                 >
                   Edit
                 </Button>
                 <Button 
-                  variant="danger" 
+                  className="action-button delete-button"
                   onClick={() => handleDelete(trip.id)}
                 >
                   Delete
@@ -180,98 +198,110 @@ const MyTrips = () => {
               </div>
             )}
             {isPast && (
-              <Badge bg="secondary">Past Trip</Badge>
+              <div className="trip-status">
+                <Badge className="trip-badge past-badge">Past Trip</Badge>
+              </div>
             )}
-          </Card.Body>
+          </div>
         </Card>
       );
     });
   };
 
-  if (loading) return <Container className="mt-4"><div>Loading...</div></Container>;
+  if (loading) return <Container className="mt-4"><div className="loading-container">Loading...</div></Container>;
 
   return (
-    <Container className="mt-4">
-      <h2>My Trips</h2>
-      <p className="text-muted">
-        Shows both trips you've posted and trips you're participating in
-      </p>
-      {error && <Alert variant="danger">{error}</Alert>}
-      {success && <Alert variant="success">{success}</Alert>}
+    <Container className="mt-4 my-trips-container">
+      <div className="page-header">
+        <h2 className="page-title">My Trips</h2>
+        <p className="page-subtitle">
+          Shows both trips you've posted and trips you're participating in
+        </p>
+      </div>
+      
+      {error && <Alert variant="danger" className="modern-alert">{error}</Alert>}
+      {success && <Alert variant="success" className="modern-alert">{success}</Alert>}
 
-      {trips.length === 0 ? (
-        <Alert variant="info">You haven't posted or joined any trips yet</Alert>
-      ) : (
-        renderTrips()
-      )}
+      <div className="trips-grid">
+        {trips.length === 0 ? (
+          <Alert variant="info" className="modern-alert">You haven't posted or joined any trips yet</Alert>
+        ) : (
+          renderTrips()
+        )}
+      </div>
 
       {/* Edit Modal */}
-      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-        <Modal.Header closeButton>
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)} className="edit-modal">
+        <Modal.Header closeButton className="modal-header-modern">
           <Modal.Title>Edit Trip</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleUpdate}>
-            <Form.Group className="mb-3">
+        <Modal.Body className="modal-body-modern">
+          <Form onSubmit={handleUpdate} className="edit-form">
+            <div className="form-floating">
               <Form.Label>Start Point</Form.Label>
               <Form.Control
                 type="text"
                 name="start_point"
                 value={formData.start_point}
                 onChange={handleInputChange}
+                className="modern-input"
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3">
+            <div className="form-floating">
               <Form.Label>Destination</Form.Label>
               <Form.Control
                 type="text"
                 name="destination"
                 value={formData.destination}
                 onChange={handleInputChange}
+                className="modern-input"
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3">
+            <div className="form-floating">
               <Form.Label>Date</Form.Label>
               <Form.Control
                 type="date"
                 name="date"
                 value={formData.date}
                 onChange={handleInputChange}
+                className="modern-input"
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3">
+            <div className="form-floating">
               <Form.Label>Time</Form.Label>
               <Form.Control
                 type="time"
                 name="time"
                 value={formData.time}
                 onChange={handleInputChange}
+                className="modern-input"
                 required
               />
               <Form.Text className="text-muted">
                 24-hour format (HH:MM)
               </Form.Text>
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3">
+            <div className="form-floating">
               <Form.Label>Available Seats</Form.Label>
               <Form.Control
                 type="number"
                 name="seats_available"
                 value={formData.seats_available}
                 onChange={handleInputChange}
+                className="modern-input"
                 min="0"
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="submit-button">
               Update Trip
             </Button>
           </Form>
@@ -281,4 +311,4 @@ const MyTrips = () => {
   );
 };
 
-export default MyTrips; 
+export default MyTrips;
