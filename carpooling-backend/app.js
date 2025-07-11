@@ -8,7 +8,11 @@ const rateLimit = require('express-rate-limit');
 
 const app = express();
 
-// Add stricter rate limiting
+/**
+ * Rate limiting middleware
+ * Limits each IP to 100 requests per 15 minutes
+ * Helps prevent abuse and DoS attacks
+ */
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per windowMs
@@ -17,37 +21,65 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-// Middleware
+/**
+ * CORS configuration
+ * Allows cross-origin requests from the frontend
+ * Production: Only allows requests from the deployed frontend
+ * Development: Allows requests from localhost:3000
+ */
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? ['https://carpooling-website-1.onrender.com']
     : 'http://localhost:3000',
   credentials: true
 }));
+
+// Parse JSON request bodies
 app.use(express.json());
 
-// Debug middleware to log all requests
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`);
-  console.log('Headers:', req.headers);
-  next();
-});
+/**
+ * Request logging middleware
+ * Logs all incoming requests for debugging purposes
+ * Only active in development mode
+ */
+if (process.env.NODE_ENV === 'development') {
+  app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path}`);
+    console.log('Headers:', req.headers);
+    next();
+  });
+}
 
-// Add root route handler
+/**
+ * Root endpoint
+ * Provides basic API information and health check
+ */
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'Carpooling API Server',
+    message: 'ShareRides API Server',
     status: 'running',
-    version: '1.0.0'
+    version: '1.0.0',
+    documentation: '/api/docs',
+    endpoints: {
+      authentication: '/api/auth',
+      trips: '/api/trips',
+      user: '/api/user'
+    }
   });
 });
 
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/trips', tripRoutes); // This will handle all trip-related routes including pending-count
-app.use('/api/user', userRoutes);
+/**
+ * API Routes
+ * All routes are prefixed with /api for better organization
+ */
+app.use('/api/auth', authRoutes);     // Authentication: signup, login, verify email
+app.use('/api/trips', tripRoutes);    // Trip management: CRUD operations, ride requests
+app.use('/api/user', userRoutes);     // User management: profile, settings, password
 
-// Error handling middleware
+/**
+ * Global error handling middleware
+ * Catches all unhandled errors and returns consistent error responses
+ */
 app.use((err, req, res, next) => {
   console.error('Global error handler:', err);
   res.status(500).json({ 
@@ -56,10 +88,20 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler
+/**
+ * 404 handler
+ * Handles requests to non-existent routes
+ */
 app.use((req, res) => {
   console.log('404 Not Found:', req.method, req.path);
-  res.status(404).json({ message: 'Route not found' });
+  res.status(404).json({ 
+    message: 'Route not found',
+    availableRoutes: [
+      '/api/auth',
+      '/api/trips', 
+      '/api/user'
+    ]
+  });
 });
 
 module.exports = app;
