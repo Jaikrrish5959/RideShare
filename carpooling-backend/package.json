@@ -25,7 +25,9 @@
     "dev": "nodemon server.js",
     "test": "jest",
     "logs": "tail -f logs/combined.log",
-    "logs:error": "tail -f logs/error.log"
+    "logs:error": "tail -f logs/error.log",
+    "cache:stats": "curl http://localhost:10000/api/cache/stats",
+    "cache:clear": "curl -X DELETE http://localhost:10000/api/cache"
   },
   "engines": {
     "node": ">=14.0.0"

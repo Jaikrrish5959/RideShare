@@ -12,18 +12,32 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Check localStorage for saved theme preference
+    // Check localStorage for saved theme preference with caching
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme === 'dark';
+    const themeTimestamp = localStorage.getItem('theme_timestamp');
+    
+    // Use cached theme if it's less than 24 hours old
+    if (savedTheme && themeTimestamp) {
+      const age = Date.now() - parseInt(themeTimestamp);
+      if (age < 24 * 60 * 60 * 1000) { // 24 hours
+        return savedTheme === 'dark';
+      }
     }
+    
     // Check system preference
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Cache the system preference
+    localStorage.setItem('theme', systemPrefersDark ? 'dark' : 'light');
+    localStorage.setItem('theme_timestamp', Date.now().toString());
+    
+    return systemPrefersDark;
   });
 
   useEffect(() => {
-    // Save theme preference to localStorage
+    // Save theme preference to localStorage with timestamp
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    localStorage.setItem('theme_timestamp', Date.now().toString());
     
     // Update CSS custom properties
     const root = document.documentElement;

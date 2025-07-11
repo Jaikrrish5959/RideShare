@@ -8,6 +8,7 @@ const rateLimit = require('express-rate-limit');
 const logger = require('./utils/logger');
 const metrics = require('./utils/metrics');
 const { requestLogger, errorHandler, healthCheck, performanceMonitor } = require('./middleware/monitoring');
+const { cache } = require('./utils/cache');
 
 const app = express();
 
@@ -108,8 +109,34 @@ app.get('/api/metrics', (req, res) => {
   }
   
   const metricsData = metrics.getMetrics();
+  const cacheStats = cache.getStats();
+  
   logger.info('Metrics requested');
-  res.json(metricsData);
+  res.json({
+    ...metricsData,
+    cache: cacheStats
+  });
+});
+
+// Cache management endpoints
+app.get('/api/cache/stats', (req, res) => {
+  if (process.env.NODE_ENV === 'production' && req.get('X-Internal-Request') !== 'true') {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+  
+  const stats = cache.getStats();
+  logger.info('Cache stats requested', stats);
+  res.json(stats);
+});
+
+app.delete('/api/cache', (req, res) => {
+  if (process.env.NODE_ENV === 'production' && req.get('X-Internal-Request') !== 'true') {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+  
+  cache.clear();
+  logger.info('Cache cleared manually');
+  res.json({ message: 'Cache cleared successfully' });
 });
 
 /**

@@ -9,6 +9,17 @@ const { Op } = require('sequelize');
 const { sequelize } = require('../config/db.config');
 const emailService = require('../services/email.service');
 const { tripValidation } = require('../middleware/tripValidation');
+const { cache, cacheHelpers } = require('../utils/cache');
+
+// Cache key generators
+const generateTripCacheKey = (query) => {
+  const { start_point, destination, date } = query;
+  return cacheHelpers.generateKey('trips', start_point || 'all', destination || 'all', date || 'all');
+};
+
+const generateUserTripsCacheKey = (userId) => {
+  return cacheHelpers.generateKey('user_trips', userId);
+};
 
 // Define specific routes first (before more general routes)
 router.get('/requests/pending-count', auth, async (req, res) => {
@@ -74,6 +85,18 @@ router.post('/', auth, tripValidation, async (req, res) => {
       userId: req.user.userId
     });
 
+    // Invalidate related caches
+    const userTripsKey = generateUserTripsCacheKey(req.user.userId);
+    cache.delete(userTripsKey);
+    
+    // Clear general trip listings cache
+    const cachePattern = cacheHelpers.generateKey('trips');
+    for (const [key] of cache.cache.entries()) {
+      if (key.startsWith(cachePattern)) {
+        cache.delete(key);
+      }
+    }
+
     console.log('Trip created successfully:', trip.toJSON());
     res.status(201).json(trip);
   } catch (error) {
@@ -92,9 +115,18 @@ router.post('/', auth, tripValidation, async (req, res) => {
   }
 });
 
-// Get all trips or search trips
+// Get all trips or search trips with caching
 router.get('/', auth, async (req, res) => {
   try {
+    const cacheKey = generateTripCacheKey(req.query);
+    
+    // Try to get from cache first
+    const cachedTrips = cache.get(cacheKey);
+    if (cachedTrips) {
+      logger.info('Trips cache hit', { cacheKey });
+      return res.json(cachedTrips);
+    }
+
     const { start_point, destination, date } = req.query;
 
     // Build the where clause based on search parameters
@@ -133,6 +165,10 @@ router.get('/', auth, async (req, res) => {
       ...trip.toJSON(),
       pendingRequestsCount: trip.RideRequests ? trip.RideRequests.length : 0
     }));
+
+    // Cache for 2 minutes (trips data changes frequently)
+    cache.set(cacheKey, tripsWithCount, 120);
+    logger.info('Trips cached', { cacheKey, count: tripsWithCount.length });
 
     res.json(tripsWithCount);
   } catch (error) {
@@ -176,6 +212,18 @@ router.delete('/:tripId', auth, async (req, res) => {
 
     // Delete the trip (this will cascade delete all associated ride requests)
     await trip.destroy();
+
+    // Invalidate caches
+    const userTripsKey = generateUserTripsCacheKey(userId);
+    cache.delete(userTripsKey);
+    
+    // Clear general trip listings cache
+    const cachePattern = cacheHelpers.generateKey('trips');
+    for (const [key] of cache.cache.entries()) {
+      if (key.startsWith(cachePattern)) {
+        cache.delete(key);
+      }
+    }
 
     res.json({ message: 'Trip deleted successfully' });
   } catch (error) {
@@ -521,6 +569,18 @@ router.put('/:tripId', auth, tripValidation, async (req, res) => {
       }
     }
 
+    // Invalidate caches after update
+    const userTripsKey = generateUserTripsCacheKey(userId);
+    cache.delete(userTripsKey);
+    
+    // Clear general trip listings cache
+    const cachePattern = cacheHelpers.generateKey('trips');
+    for (const [key] of cache.cache.entries()) {
+      if (key.startsWith(cachePattern)) {
+        cache.delete(key);
+      }
+    }
+
     res.json({ message: 'Trip updated successfully' });
   } catch (error) {
     console.error('Error updating trip:', error);
@@ -531,11 +591,19 @@ router.put('/:tripId', auth, tripValidation, async (req, res) => {
   }
 });
 
-// Update the my-trips route
+// Update the my-trips route with caching
 router.get('/my-trips', auth, async (req, res) => {
   try {
     const userId = req.user.userId;
+    const cacheKey = generateUserTripsCacheKey(userId);
     
+    // Try cache first
+    const cachedTrips = cache.get(cacheKey);
+    if (cachedTrips) {
+      logger.info('User trips cache hit', { userId, cacheKey });
+      return res.json(cachedTrips);
+    }
+
     // Get trips posted by the user
     const postedTrips = await Trip.findAll({
       where: { userId },
@@ -577,6 +645,10 @@ router.get('/my-trips', auth, async (req, res) => {
         return dateComparison !== 0 ? dateComparison : a.time.localeCompare(b.time);
       });
 
+    // Cache user trips for 5 minutes
+    cache.set(cacheKey, allTrips, 300);
+    logger.info('User trips cached', { userId, cacheKey, count: allTrips.length });
+
     res.json(allTrips);
   } catch (error) {
     console.error('Error fetching user trips:', error);
@@ -587,4 +659,4 @@ router.get('/my-trips', auth, async (req, res) => {
   }
 });
 
-module.exports = router; 
+module.exports = router;

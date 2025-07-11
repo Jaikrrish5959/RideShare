@@ -30,8 +30,9 @@ A full-stack carpooling web application that allows users to post trips, search 
 - **React.js** - User interface framework
 - **React Router** - Client-side routing
 - **Bootstrap** - CSS framework for responsive design
-- **Axios** - HTTP client for API requests
+- **Axios** - HTTP client for API requests with response caching
 - **React Context** - State management for themes and user data
+- **localStorage/sessionStorage** - Client-side data caching and persistence
 
 ### Backend
 - **Node.js** - Runtime environment
@@ -41,12 +42,20 @@ A full-stack carpooling web application that allows users to post trips, search 
 - **JWT** - JSON Web Token for authentication
 - **Bcrypt** - Password hashing
 - **Nodemailer** - Email service integration
+- **In-Memory Cache** - High-performance request and data caching
 
 ### Development Tools
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
 - **Nodemon** - Development server auto-restart
 - **dotenv** - Environment variable management
+- **Winston** - Comprehensive logging with caching metrics
+
+### Performance & Caching
+- **Multi-layer Caching** - Frontend request caching, backend memory cache, and persistent storage
+- **Cache Invalidation** - Smart cache clearing on data mutations
+- **Performance Monitoring** - Request timing and cache hit rate tracking
+- **Memory Management** - Automatic cache cleanup and memory optimization
 
 ## Quick Start
 
