@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
 import './Home.css';
+import './LoginSignup.css';
 
 const LoginSignup = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -98,7 +99,7 @@ const LoginSignup = ({ onLogin }) => {
                 <Button
                   variant="link"
                   onClick={() => setIsLogin(!isLogin)}
-                  style={{ color: '#000', textDecoration: 'none' }}
+                  className="theme-link"
                 >
                   {isLogin ? 'Need an account? Sign up' : 'Already have an account? Login'}
                 </Button>
@@ -106,7 +107,7 @@ const LoginSignup = ({ onLogin }) => {
                   <Button
                     variant="link"
                     onClick={handleResendVerification}
-                    style={{ color: '#000', textDecoration: 'none' }}
+                    className="theme-link"
                   >
                     Resend verification email
                   </Button>

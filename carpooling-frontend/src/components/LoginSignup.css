@@ -72,4 +72,37 @@
 .auth-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-} 
+}
+
+/* Theme-aware link styling */
+.theme-link {
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+  font-weight: 500 !important;
+}
+
+.theme-link:hover {
+  color: var(--accent-primary) !important;
+  text-decoration: underline !important;
+}
+
+.theme-link:focus {
+  color: var(--accent-primary) !important;
+  text-decoration: underline !important;
+}
+
+/* Override Bootstrap's btn-link styling */
+.btn-link.theme-link {
+  border: none !important;
+  padding: 0.375rem 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.btn-link.theme-link:hover,
+.btn-link.theme-link:focus {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
