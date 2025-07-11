@@ -115,7 +115,14 @@ const Settings = ({ user, onUserUpdate }) => {
         response: error.response?.data,
         status: error.response?.status
       });
-      setError(error.response?.data?.message || 'Failed to update settings');
+      
+      // Handle validation errors specifically
+      if (error.response?.data?.errors && Array.isArray(error.response.data.errors)) {
+        const errorMessages = error.response.data.errors.map(err => err.msg).join(', ');
+        setError(errorMessages);
+      } else {
+        setError(error.response?.data?.message || 'Failed to update settings');
+      }
     } finally {
       setLoading(false);
     }

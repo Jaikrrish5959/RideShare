@@ -25,9 +25,10 @@ router.put('/settings', auth, updateValidation, async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log('Validation errors:', errors.array());
       return res.status(400).json({ 
         message: 'Validation failed',
-        errors: errors.array() 
+        errors: errors.array()
       });
     }
 
