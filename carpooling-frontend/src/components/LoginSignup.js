@@ -52,7 +52,7 @@ const LoginSignup = ({ onLogin }) => {
   const handleResendVerification = async () => {
     try {
       await authService.resendVerification(email);
-      setMessage('Verification email sent successfully');
+      setMessage('Verification email sent successfully (Check spam if not in inbox)');
     } catch (err) {
       setError(err.message || 'Failed to resend verification email');
     }
