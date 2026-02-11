@@ -59,6 +59,10 @@ A full-stack carpooling web application that allows users to post trips, search 
 
 ## Quick Start
 
+> 📖 **For detailed local development setup instructions, see [SETUP.md](./SETUP.md)**
+> 
+> 🛠️ **For a list of issues fixed and solutions, see [FIXES.md](./FIXES.md)**
+
 ### Prerequisites
 - Node.js (v14 or higher)
 - PostgreSQL database
@@ -122,8 +126,17 @@ Create `.env` file in the frontend directory:
     ```
 
 5. **Start the application**
+
+    **Option A: Using the startup script (Recommended)**
+    ```bash
+    # From the root directory
+    ./start-local.sh
+    ```
+    
+    **Option B: Manual startup**
     ```bash
     # Start backend server (from root directory)
+    cd carpooling-backend
     npm start
 
     # Start frontend server (in new terminal)

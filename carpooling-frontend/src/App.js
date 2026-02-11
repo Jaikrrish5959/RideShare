@@ -1,6 +1,5 @@
 // src/App.js
 import React, { useState, useEffect, useCallback } from 'react';
-import { debounce } from 'lodash';  // Add this with other imports
 import { HashRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import SearchTrips from './components/SearchTrips';
@@ -50,14 +49,6 @@ function AppContent() {
 
   // Increase polling interval to reduce requests
   const POLLING_INTERVAL = 60000; // Change from 30000 to 60000
-
-  // Add request debouncing
-  const debouncedFetch = useCallback(
-    debounce(async () => {
-      await fetchIncomingRequestsCount();
-    }, 1000),
-    []
-  );
 
   useEffect(() => {
     const initializeApp = async () => {

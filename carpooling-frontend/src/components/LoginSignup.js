@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
-import { useTheme } from '../contexts/ThemeContext';
 import './Home.css';
 import './LoginSignup.css';
 
 const LoginSignup = ({ onLogin }) => {
-  const { isDarkMode } = useTheme();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
