@@ -6,20 +6,18 @@ require('dotenv').config();
 
 // Create reusable transporter with secure settings
 const transporter = nodemailer.createTransport({
+  service: 'gmail',
   host: 'smtp.gmail.com',
-  port: 587, // TLS port
-  secure: false, // Use TLS
+  port: 465, // SSL port
+  secure: true, // Use SSL
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS // Using App Password
-  },
-  tls: {
-    rejectUnauthorized: true // Verify TLS/SSL certificate
   }
 });
 
 // Verify transporter configuration
-transporter.verify(function(error, success) {
+transporter.verify(function (error, success) {
   if (error) {
     console.error('SMTP connection error:', error);
   } else {
@@ -55,9 +53,9 @@ const emailService = {
   sendVerificationEmail: async (email, verificationToken) => {
     const startTime = Date.now();
     logger.info('Sending verification email', { email, operation: 'verification' });
-    
+
     const verificationLink = `${process.env.FRONTEND_URL}/#/verify-email?token=${verificationToken}`;
-    
+
     const mailOptions = {
       from: `"ShareRides" <${process.env.EMAIL_USER}>`,
       to: email,
@@ -88,13 +86,13 @@ const emailService = {
     try {
       emailQueue.push(mailOptions);
       await processEmailQueue();
-      
+
       const duration = Date.now() - startTime;
       logger.logEmail('verification_email', email, true);
       metrics.recordEmail(true);
-      logger.info('Verification email queued successfully', { 
-        email, 
-        duration: `${duration}ms` 
+      logger.info('Verification email queued successfully', {
+        email,
+        duration: `${duration}ms`
       });
     } catch (error) {
       const duration = Date.now() - startTime;
@@ -116,10 +114,10 @@ const emailService = {
       try {
         return await operation();
       } catch (error) {
-        logger.warn('Email retry attempt', { 
-          attempt: i + 1, 
-          maxRetries, 
-          error: error.message 
+        logger.warn('Email retry attempt', {
+          attempt: i + 1,
+          maxRetries,
+          error: error.message
         });
         if (i === maxRetries - 1) throw error;
         await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, i)));
@@ -136,11 +134,11 @@ const emailService = {
         return;
       }
 
-      logger.info('Sending ride request update', { 
-        userId, 
-        email: user.email, 
-        status, 
-        operation: 'ride_request_update' 
+      logger.info('Sending ride request update', {
+        userId,
+        email: user.email,
+        status,
+        operation: 'ride_request_update'
       });
 
       await emailService.retryOperation(async () => {
@@ -180,21 +178,21 @@ const emailService = {
       const duration = Date.now() - startTime;
       logger.logEmail('ride_request_update', user.email, true);
       metrics.recordEmail(true);
-      logger.info('Ride request update email sent', { 
-        userId, 
-        email: user.email, 
-        status, 
-        duration: `${duration}ms` 
+      logger.info('Ride request update email sent', {
+        userId,
+        email: user.email,
+        status,
+        duration: `${duration}ms`
       });
     } catch (error) {
       const duration = Date.now() - startTime;
       logger.logEmail('ride_request_update', null, false, error);
       metrics.recordEmail(false);
-      logger.error('Error sending ride request update email', { 
-        userId, 
-        status, 
+      logger.error('Error sending ride request update email', {
+        userId,
+        status,
         duration: `${duration}ms`,
-        error: error.message 
+        error: error.message
       });
     }
   },
