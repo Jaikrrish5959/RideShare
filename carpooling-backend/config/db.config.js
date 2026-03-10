@@ -1,24 +1,45 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
+let sequelize;
+
+if (process.env.DATABASE_URL) {
+  // Use connection string if available (Render/Neon)
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
-    // Reduce connection pool size
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    },
     pool: {
-      max: 3, // Reduce from 5
+      max: 3,
       min: 0,
       acquire: 30000,
       idle: 10000
     },
-    // Add query logging only in development
     logging: process.env.NODE_ENV === 'development' ? console.log : false
-  }
-);
+  });
+} else {
+  // Fallback to individual variables
+  sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+      host: process.env.DB_HOST,
+      dialect: 'postgres',
+      pool: {
+        max: 3,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+      },
+      logging: process.env.NODE_ENV === 'development' ? console.log : false
+    }
+  );
+}
 
 // Add test connection function
 async function testConnection() {
