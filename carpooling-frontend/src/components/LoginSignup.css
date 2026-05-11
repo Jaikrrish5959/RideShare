@@ -1,130 +1,127 @@
-/* Modern form styling */
+/* ── Login / Sign Up Card ───────────────────────────── */
+/* Matches reference: white card, clean inputs,
+   green primary button, link toggle             */
+
 .login-form-container {
-  background: var(--bg-tertiary);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 16px;
-  box-shadow: 0 4px 30px var(--shadow-light);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--border-color);
-  padding: 2.5rem;
-  transition: transform 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
-.login-form-container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 32px var(--shadow-medium);
+[data-theme="dark"] .login-form-container {
+  background: #1e293b;
+  border-color: #334155;
 }
 
-.login-form-container h2 {
-  color: var(--text-primary);
+.login-form-container h3 {
+  font-size: 1.375rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
-  text-align: center;
+  color: #111827;
+  margin-bottom: 4px;
 }
 
-/* Modern input styling */
+[data-theme="dark"] .login-form-container h3 {
+  color: #f1f5f9;
+}
+
+/* ── Form inputs ────────────────────────────────────── */
 .modern-input {
-  position: relative;
-  background: var(--bg-primary) !important;
-  padding: 12px 16px;
-  border: 2px solid var(--border-color);
-  border-radius: 10px;
-  font-size: 1rem;
-  color: var(--text-primary) !important;
-  transition: all 0.3s ease;
+  display: block;
+  width: 100%;
+  padding: 10px 14px !important;
+  font-size: 0.9375rem !important;
+  font-family: 'Inter', sans-serif !important;
+  color: #111827 !important;
+  background-color: #ffffff !important;
+  border: 1.5px solid #e5e7eb !important;
+  border-radius: 10px !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+[data-theme="dark"] .modern-input {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
 }
 
 .modern-input:focus {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
-  outline: none;
+  border-color: #16a34a !important;
+  box-shadow: 0 0 0 3px rgba(22,163,74,0.12) !important;
 }
 
-/* Modern button styling */
+.modern-input::placeholder {
+  color: #9ca3af !important;
+}
+
+/* ── Submit button ──────────────────────────────────── */
 .modern-button {
-  padding: 12px 24px;
+  display: block;
+  width: 100%;
+  padding: 11px 20px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: #ffffff !important;
+  background: #16a34a;
   border: none;
   border-radius: 10px;
-  background: var(--accent-primary);
-  color: white !important;
-  font-weight: 700;
-  transition: all 0.3s ease;
   cursor: pointer;
-  width: 100%;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 
 .modern-button:hover {
-  background: var(--accent-secondary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+  background: #15803d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(22,163,74,0.28);
 }
 
 .modern-button:active {
   transform: translateY(0);
 }
 
-/* Toggle switch styling */
-.toggle-switch {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 1rem 0;
-}
-
-.toggle-switch label {
-  cursor: pointer;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-/* Card hover effect */
-.auth-card {
-  transition: all 0.3s ease;
-  border-radius: 16px;
-}
-
-.auth-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 32px var(--shadow-medium);
-}
-
-/* Theme-aware link styling */
-.theme-link {
-  color: var(--accent-primary) !important;
-  text-decoration: none !important;
-  transition: all 0.3s ease !important;
+/* ── Link toggle ────────────────────────────────────── */
+.theme-link,
+.btn-link.theme-link {
+  color: #16a34a !important;
   font-weight: 600 !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-.theme-link:hover {
-  color: var(--accent-secondary) !important;
+.theme-link:hover,
+.btn-link.theme-link:hover {
+  color: #15803d !important;
   text-decoration: underline !important;
 }
 
-.theme-link:focus {
-  color: var(--accent-secondary) !important;
+[data-theme="dark"] .theme-link,
+[data-theme="dark"] .btn-link.theme-link {
+  color: #22c55e !important;
 }
 
-/* Override Bootstrap's btn-link styling completely */
-.btn-link.theme-link {
-  border: none !important;
-  padding: 0.375rem 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
+/* ── Auth card (Bootstrap Card wrapper) ─────────────── */
+.auth-card {
+  border: 1px solid #e5e7eb !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07) !important;
+  background: #ffffff !important;
+  padding: 4px;
 }
 
-.btn-link.theme-link:hover,
-.btn-link.theme-link:focus,
-.btn-link.theme-link:active {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-/* Dark theme specific overrides */
-[data-theme="dark"] .login-form-container {
-  background: var(--bg-secondary);
-}
-
-[data-theme="dark"] .modern-input {
-  border-color: var(--border-color);
+[data-theme="dark"] .auth-card {
+  background: #1e293b !important;
+  border-color: #334155 !important;
 }

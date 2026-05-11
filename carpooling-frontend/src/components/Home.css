@@ -1,88 +1,102 @@
-/* src/components/Home.css */
+/* ── Home / LoginSignup Layout ──────────────────────── */
+/* Pure white background, centered card, green CTA     */
+
 .home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(160deg, var(--bg-primary) 0%, var(--bg-secondary) 60%, rgba(22, 163, 74, 0.04) 100%);
-    color: var(--text-primary);
-    padding: 20px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 24px 16px;
+}
 
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    gap: 2rem;
-  }
+[data-theme="dark"] .home-container {
+  background-color: #0f172a;
+}
 
-  .welcome-text {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+  gap: 32px;
+}
 
-  .welcome-text h2 {
-    font-size: 2.75rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-    line-height: 1.2;
-  }
+/* Left text block */
+.welcome-text {
+  text-align: center;
+}
 
-  .welcome-text p {
-    font-size: 1.15rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-secondary);
-  }
+.welcome-text h2 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
 
-  .login-form {
-    width: 100%;
-    max-width: 420px;
-  }
+[data-theme="dark"] .welcome-text h2 {
+  color: #f1f5f9;
+}
 
-  .cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+.welcome-text p {
+  font-size: 1.0625rem;
+  color: #6b7280;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
 
-  .cta-buttons .btn {
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0;
-    padding: 0.875rem 2rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-  }
+[data-theme="dark"] .welcome-text p {
+  color: #94a3b8;
+}
 
-  .cta-buttons .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(22, 163, 74, 0.25);
-  }
+/* Login card wrapper */
+.login-form {
+  width: 100%;
+  max-width: 420px;
+}
 
-  @media (max-width: 768px) {
-    .welcome-text h2 {
-      font-size: 2rem;
-    }
+/* CTA buttons on authenticated home */
+.cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
 
-    .welcome-text p {
-      font-size: 1rem;
-    }
+.cta-buttons .btn {
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  padding: 12px 28px !important;
+  border-radius: 10px !important;
+  transition: all 0.2s ease !important;
+}
 
-    .content-wrapper {
-      gap: 1rem;
-    }
+/* Primary green CTA */
+.cta-buttons .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(22,163,74,0.3) !important;
+}
 
-    .cta-buttons {
-      flex-direction: column;
-      width: 100%;
-      max-width: 300px;
-    }
+/* Outlined secondary CTA */
+.cta-buttons .btn-secondary {
+  background: #ffffff !important;
+  border: 1.5px solid #e5e7eb !important;
+  color: #111827 !important;
+}
 
-    .cta-buttons .btn {
-      width: 100%;
-    }
-  }
+.cta-buttons .btn-secondary:hover {
+  border-color: #16a34a !important;
+  color: #16a34a !important;
+  background: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .welcome-text h2 { font-size: 1.65rem; }
+  .welcome-text p  { font-size: 1rem; }
+  .content-wrapper { gap: 20px; }
+  .cta-buttons { flex-direction: column; width: 100%; max-width: 280px; }
+  .cta-buttons .btn { width: 100%; }
+}

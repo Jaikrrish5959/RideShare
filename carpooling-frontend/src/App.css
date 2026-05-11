@@ -1,568 +1,519 @@
-/* Theme Variables */
+/* =====================================================
+   RideShare Design System - White & Green Theme
+   Colors extracted directly from reference images
+   ===================================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* ── Root Variables ─────────────────────────────────── */
 :root {
-  /* Light theme colors - Green RideShare Theme */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8faf9;
-  --bg-tertiary: rgba(255, 255, 255, 0.97);
-  --text-primary: #1a1a2e;
-  --text-secondary: #4a5568;
-  --text-muted: #718096;
-  --border-color: #e2e8f0;
-  --shadow-light: rgba(0, 0, 0, 0.06);
-  --shadow-medium: rgba(0, 0, 0, 0.1);
-  --shadow-heavy: rgba(0, 0, 0, 0.18);
-  --accent-primary: #16A34A;
-  --accent-secondary: #15803D;
-  --accent-light: rgba(22, 163, 74, 0.08);
-  --accent-border: rgba(22, 163, 74, 0.2);
-  --success-color: #16A34A;
-  --danger-color: #ef4444;
-  --warning-color: #f59e0b;
-  --button-text: #ffffff;
-  --link-color: #16A34A;
-  --link-hover-color: #15803D;
+  /* Backgrounds */
+  --rs-bg:          #ffffff;
+  --rs-bg-soft:     #f9fafb;
+  --rs-bg-muted:    #f3f4f6;
+  --rs-bg-green:    #f0fdf4;
 
-  /* Toggle colors */
-  --toggle-track-bg: #e5e7eb;
-  --toggle-thumb-bg: #ffffff;
-  --toggle-border: #d1d5db;
+  /* Text */
+  --rs-text:        #111827;
+  --rs-text-sub:    #374151;
+  --rs-text-muted:  #6b7280;
+  --rs-text-light:  #9ca3af;
 
-  font-size: 16px !important;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Borders */
+  --rs-border:      #e5e7eb;
+  --rs-border-focus:#16a34a;
+
+  /* Green Palette */
+  --rs-green:       #16a34a;
+  --rs-green-dark:  #15803d;
+  --rs-green-light: #f0fdf4;
+  --rs-green-border:#bbf7d0;
+  --rs-green-text:  #166534;
+
+  /* Status */
+  --rs-danger:      #ef4444;
+  --rs-danger-bg:   #fef2f2;
+  --rs-danger-border:#fecaca;
+  --rs-warning:     #f59e0b;
+  --rs-warning-bg:  #fffbeb;
+  --rs-success:     #16a34a;
+  --rs-success-bg:  #f0fdf4;
+
+  /* Shadows */
+  --rs-shadow-xs:   0 1px 2px rgba(0,0,0,0.05);
+  --rs-shadow-sm:   0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --rs-shadow-md:   0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+  --rs-shadow-lg:   0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+
+  /* Radius */
+  --rs-radius-sm:   6px;
+  --rs-radius:      10px;
+  --rs-radius-md:   12px;
+  --rs-radius-lg:   16px;
+  --rs-radius-xl:   20px;
+  --rs-radius-full: 9999px;
+
+  /* Spacing */
+  --rs-space-xs:    4px;
+  --rs-space-sm:    8px;
+  --rs-space-md:    16px;
+  --rs-space-lg:    24px;
+  --rs-space-xl:    32px;
+  --rs-space-2xl:   48px;
+
+  /* Toggle */
+  --toggle-track:   #e5e7eb;
+  --toggle-thumb:   #ffffff;
+  --toggle-border:  #d1d5db;
+
+  /* Dark mode aliases (same names, overridden below) */
+  --bg-primary:     var(--rs-bg);
+  --bg-secondary:   var(--rs-bg-soft);
+  --bg-tertiary:    var(--rs-bg);
+  --text-primary:   var(--rs-text);
+  --text-secondary: var(--rs-text-sub);
+  --text-muted:     var(--rs-text-muted);
+  --border-color:   var(--rs-border);
+  --accent-primary: var(--rs-green);
+  --accent-secondary:var(--rs-green-dark);
+  --accent-light:   var(--rs-green-light);
+  --accent-border:  var(--rs-green-border);
+  --success-color:  var(--rs-success);
+  --danger-color:   var(--rs-danger);
+  --warning-color:  var(--rs-warning);
+  --button-text:    #ffffff;
+  --link-color:     var(--rs-green);
+  --link-hover-color:var(--rs-green-dark);
+  --shadow-light:   rgba(0,0,0,0.06);
+  --shadow-medium:  rgba(0,0,0,0.1);
+  --shadow-heavy:   rgba(0,0,0,0.18);
+
+  font-size: 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* ── Dark Mode ──────────────────────────────────────── */
 [data-theme="dark"] {
-  /* Dark theme colors - Green accent preserved */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: rgba(15, 23, 42, 0.97);
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --border-color: #334155;
-  --shadow-light: rgba(0, 0, 0, 0.3);
-  --shadow-medium: rgba(0, 0, 0, 0.4);
-  --shadow-heavy: rgba(0, 0, 0, 0.6);
-  --accent-primary: #22c55e;
-  --accent-secondary: #16a34a;
-  --accent-light: rgba(34, 197, 94, 0.1);
-  --accent-border: rgba(34, 197, 94, 0.25);
-  --success-color: #4ade80;
-  --danger-color: #f87171;
-  --warning-color: #fbbf24;
-  --button-text: #ffffff;
-  --link-color: #4ade80;
-  --link-hover-color: #22c55e;
+  --rs-bg:          #0f172a;
+  --rs-bg-soft:     #1e293b;
+  --rs-bg-muted:    #334155;
+  --rs-bg-green:    rgba(22,163,74,0.08);
 
-  /* Toggle colors */
-  --toggle-track-bg: #334155;
-  --toggle-thumb-bg: #1e293b;
-  --toggle-border: #475569;
+  --rs-text:        #f1f5f9;
+  --rs-text-sub:    #cbd5e1;
+  --rs-text-muted:  #94a3b8;
+  --rs-text-light:  #64748b;
+
+  --rs-border:      #334155;
+  --rs-border-focus:#22c55e;
+
+  --rs-green:       #22c55e;
+  --rs-green-dark:  #16a34a;
+  --rs-green-light: rgba(34,197,94,0.08);
+  --rs-green-border:rgba(34,197,94,0.2);
+  --rs-green-text:  #4ade80;
+
+  --rs-danger:      #f87171;
+  --rs-danger-bg:   rgba(239,68,68,0.1);
+  --rs-danger-border:rgba(248,113,113,0.3);
+  --rs-warning:     #fbbf24;
+  --rs-warning-bg:  rgba(245,158,11,0.1);
+
+  --toggle-track:   #334155;
+  --toggle-thumb:   #1e293b;
+  --toggle-border:  #475569;
+
+  --bg-primary:     var(--rs-bg);
+  --bg-secondary:   var(--rs-bg-soft);
+  --bg-tertiary:    var(--rs-bg);
+  --text-primary:   var(--rs-text);
+  --text-secondary: var(--rs-text-sub);
+  --text-muted:     var(--rs-text-muted);
+  --border-color:   var(--rs-border);
+  --accent-primary: var(--rs-green);
+  --accent-secondary:var(--rs-green-dark);
+  --accent-light:   var(--rs-green-light);
+  --accent-border:  var(--rs-green-border);
+  --success-color:  var(--rs-green);
+  --danger-color:   var(--rs-danger);
+  --warning-color:  var(--rs-warning);
+  --shadow-light:   rgba(0,0,0,0.25);
+  --shadow-medium:  rgba(0,0,0,0.4);
+  --shadow-heavy:   rgba(0,0,0,0.6);
+  --link-color:     var(--rs-green);
+  --link-hover-color:var(--rs-green-dark);
 }
 
-/* Apply theme colors to body and all text elements */
-body {
-  background-color: var(--bg-primary) !important;
-  color: var(--text-primary) !important;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* ── Base Reset ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
-}
-
-/* Ensure all text elements inherit theme colors with higher specificity */
-*,
-*::before,
-*::after {
-  color: inherit;
-  -webkit-text-size-adjust: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Specific text element overrides with higher specificity */
-p, span, div, h1, h2, h3, h4, h5, h6,
-label, td, th, li, a, small,
-.text-muted, .text-secondary,
-.form-label, .form-text, .form-control,
-.card-text, .card-title, .card-subtitle,
-.navbar-text, .nav-link, .navbar-brand,
-.btn, .alert {
-  color: var(--text-primary) !important;
-}
-
-/* General alert styling that works with themes */
-.alert {
-  border-radius: 10px !important;
-  border-width: 1px !important;
-  font-weight: 500 !important;
-  transition: all 0.3s ease !important;
-}
-
-/* Override Bootstrap's muted classes with theme colors */
-.text-muted,
-.text-muted *,
-small.text-muted,
-.form-text {
-  color: var(--text-muted) !important;
-}
-
-.text-secondary,
-.text-secondary *,
-small.text-secondary {
-  color: var(--text-secondary) !important;
-}
-
-/* Force Bootstrap elements to respect theme */
-.form-control,
-.form-control::placeholder,
-.form-select,
-.form-select::placeholder {
-  color: var(--text-primary) !important;
-  background-color: var(--bg-primary) !important;
-}
-
-.form-control::placeholder {
-  color: var(--text-muted) !important;
-  opacity: 1 !important;
-}
-
-/* Fix navbar gap */
-.main-content {
-  margin-top: 64px !important;
-  padding: 24px;
-  background-color: var(--bg-primary) !important;
-  min-height: calc(100vh - 64px) !important;
-  transition: background-color 0.3s ease;
-}
-
-/* Force hardware acceleration and prevent iOS zoom */
-* {
-  -webkit-text-size-adjust: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Bootstrap overrides for dark theme */
-[data-theme="dark"] .card {
-  background-color: var(--bg-secondary) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
-/* Bootstrap Alert overrides for dark theme */
-[data-theme="dark"] .alert {
-  background-color: var(--bg-secondary) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
-[data-theme="dark"] .alert-info {
-  background-color: var(--accent-light) !important;
-  border-color: var(--accent-border) !important;
-  color: var(--text-primary) !important;
-}
-
-[data-theme="dark"] .alert-danger {
-  background-color: rgba(239, 68, 68, 0.12) !important;
-  border-color: var(--danger-color) !important;
-  color: var(--text-primary) !important;
-}
-
-[data-theme="dark"] .alert-success {
-  background-color: rgba(34, 197, 94, 0.12) !important;
-  border-color: var(--success-color) !important;
-  color: var(--text-primary) !important;
-}
-
-[data-theme="dark"] .alert-warning {
-  background-color: rgba(245, 158, 11, 0.12) !important;
-  border-color: var(--warning-color) !important;
-  color: var(--text-primary) !important;
-}
-
-/* Bootstrap Tabs Dark Theme Overrides */
-[data-theme="dark"] .nav-tabs {
-  border-bottom-color: var(--border-color) !important;
-}
-
-[data-theme="dark"] .nav-tabs .nav-link {
-  color: var(--text-secondary) !important;
-  background-color: transparent !important;
-  border-color: transparent !important;
-}
-
-[data-theme="dark"] .nav-tabs .nav-link:hover {
-  color: var(--text-primary) !important;
-  background-color: var(--bg-secondary) !important;
-  border-color: var(--border-color) !important;
-}
-
-[data-theme="dark"] .nav-tabs .nav-link.active {
-  color: var(--text-primary) !important;
-  background-color: var(--bg-primary) !important;
-  border-color: var(--border-color) var(--border-color) var(--bg-primary) !important;
-}
-
-[data-theme="dark"] .tab-content {
-  background-color: var(--bg-primary) !important;
-  color: var(--text-primary) !important;
-}
-
-/* Light theme tab overrides for consistency */
-[data-theme="light"] .nav-tabs .nav-link {
-  color: var(--text-secondary) !important;
-  background-color: transparent !important;
-}
-
-[data-theme="light"] .nav-tabs .nav-link:hover {
-  color: var(--text-primary) !important;
-  background-color: var(--bg-secondary) !important;
-}
-
-[data-theme="light"] .nav-tabs .nav-link.active {
-  color: var(--accent-primary) !important;
-  background-color: var(--bg-primary) !important;
-}
-
-/* Light theme alert overrides for consistency */
-[data-theme="light"] .alert {
-  background-color: var(--bg-secondary) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .alert-info {
-  background-color: var(--accent-light) !important;
-  border-color: var(--accent-border) !important;
-  color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .alert-danger {
-  background-color: rgba(239, 68, 68, 0.08) !important;
-  border-color: rgba(239, 68, 68, 0.2) !important;
-  color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .alert-success {
-  background-color: rgba(22, 163, 74, 0.08) !important;
-  border-color: rgba(22, 163, 74, 0.2) !important;
-  color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .alert-warning {
-  background-color: rgba(245, 158, 11, 0.08) !important;
-  border-color: rgba(245, 158, 11, 0.2) !important;
-  color: var(--text-primary) !important;
-}
-
-/* Mobile specific overrides */
-@media screen and (max-width: 768px) {
-  /* Ensure consistent base size */
-  :root {
-    font-size: 16px !important;
-  }
-
-  /* Force theme variables to be applied on mobile */
-  body {
-    background-color: var(--bg-primary) !important;
-    color: var(--text-primary) !important;
-  }
-
-  /* Ensure theme toggle works on mobile */
-  .theme-toggle {
-    -webkit-tap-highlight-color: transparent !important;
-    touch-action: manipulation !important;
-  }
-
-  /* Fix tab styling on mobile */
-  .nav-tabs {
-    border-bottom: 1px solid var(--border-color) !important;
-  }
-
-  .nav-tabs .nav-link {
-    font-size: 16px !important;
-    padding: 12px 16px !important;
-    color: var(--text-secondary) !important;
-  }
-
-  .nav-tabs .nav-link.active {
-    color: var(--text-primary) !important;
-    background-color: var(--bg-primary) !important;
-    border-color: var(--border-color) var(--border-color) var(--bg-primary) !important;
-  }
-
-  /* Ensure readable text */
-  p, .card-text {
-    font-size: 16px !important;
-    line-height: 1.5 !important;
-  }
-
-  h1 { font-size: 24px !important; }
-  h2 { font-size: 20px !important; }
-  h3 { font-size: 18px !important; }
-
-  /* Fix container padding */
-  .container {
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-  }
-
-  /* Fix main content spacing for mobile */
-  .main-content {
-    margin-top: 56px !important;
-    padding: 15px !important;
-  }
-}
-
-/* Handle iOS Safari safe areas */
-@supports (padding-top: env(safe-area-inset-top)) {
-  .main-content {
-    padding-top: calc(20px + env(safe-area-inset-top));
-    padding-bottom: calc(20px + env(safe-area-inset-bottom));
-    padding-left: calc(20px + env(safe-area-inset-left));
-    padding-right: calc(20px + env(safe-area-inset-right));
-  }
-}
-
-/* iOS-specific fixes */
-@supports (-webkit-touch-callout: none) {
-  /* Prevent auto-zoom on form inputs */
-  input, select, textarea {
-    font-size: 16px !important;
-  }
-
-  /* Fix 100vh on iOS */
-  .min-vh-100 {
-    min-height: -webkit-fill-available !important;
-  }
-
-  html {
-    height: -webkit-fill-available !important;
-  }
-}
-
-/* Add viewport height fix for mobile browsers */
-.min-vh-100 {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
 }
 
 html {
   height: -webkit-fill-available;
 }
 
-/* Prevent iOS font-size adjustment */
 body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 16px !important;
+  background-color: var(--rs-bg) !important;
+  color: var(--rs-text) !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
 
-/* Force all buttons to use white text */
-.btn,
-.btn-primary,
-.btn-secondary,
-.btn-success,
-.btn-danger,
-.btn-warning,
-.btn-info,
-.btn-light,
-.btn-dark,
-.btn-outline-primary,
-.btn-outline-secondary,
-.btn-outline-success,
-.btn-outline-danger,
-.btn-outline-warning,
-.btn-outline-info,
-.btn-outline-light,
-.btn-outline-dark,
-button,
-input[type="submit"],
-input[type="button"],
-.submit-button,
-.search-button,
-.request-button,
-.action-button,
-.modern-button,
-.seats-button {
-  color: var(--button-text) !important;
+/* ── Layout ─────────────────────────────────────────── */
+.main-content {
+  margin-top: 65px !important;
+  min-height: calc(100vh - 65px) !important;
+  background-color: var(--rs-bg) !important;
+  padding: var(--rs-space-lg);
+  transition: background-color 0.25s ease;
 }
 
-/* Ensure Bootstrap button hover states keep white text */
-.btn:hover,
-.btn-primary:hover,
-.btn-secondary:hover,
-.btn-success:hover,
-.btn-danger:hover,
-.btn-warning:hover,
-.btn-info:hover,
-.btn-light:hover,
-.btn-dark:hover,
-.btn:focus,
-.btn-primary:focus,
-.btn-secondary:focus,
-.btn-success:focus,
-.btn-danger:focus,
-.btn-warning:focus,
-.btn-info:focus,
-.btn-light:focus,
-.btn-dark:focus,
-.btn:active,
-.btn-primary:active,
-.btn-secondary:active,
-.btn-success:active,
-.btn-danger:active,
-.btn-warning:active,
-.btn-info:active,
-.btn-light:active,
-.btn-dark:active {
-  color: var(--button-text) !important;
+.min-vh-100 {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
-/* Special handling for outline buttons */
-.btn-outline-primary,
-.btn-outline-secondary,
-.btn-outline-success,
-.btn-outline-danger,
-.btn-outline-warning,
-.btn-outline-info,
-.btn-outline-light,
-.btn-outline-dark {
-  color: var(--text-primary) !important;
+/* ── Typography overrides ───────────────────────────── */
+p, span, div, h1, h2, h3, h4, h5, h6,
+label, td, th, li, small {
+  color: inherit;
 }
 
-.btn-outline-primary:hover,
-.btn-outline-secondary:hover,
-.btn-outline-success:hover,
-.btn-outline-danger:hover,
-.btn-outline-warning:hover,
-.btn-outline-info:hover,
-.btn-outline-light:hover,
-.btn-outline-dark:hover {
-  color: var(--button-text) !important;
+/* Keep muted text consistent */
+.text-muted, .text-muted *, small.text-muted, .form-text {
+  color: var(--rs-text-muted) !important;
 }
 
-/* Bootstrap btn-primary override to green */
+.text-secondary, .text-secondary *, small.text-secondary {
+  color: var(--rs-text-sub) !important;
+}
+
+/* ── Inputs (Bootstrap override) ────────────────────── */
+.form-control, .form-select {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.9375rem !important;
+  color: var(--rs-text) !important;
+  background-color: var(--rs-bg) !important;
+  border: 1.5px solid var(--rs-border) !important;
+  border-radius: var(--rs-radius) !important;
+  padding: 10px 14px !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  box-shadow: none !important;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--rs-green) !important;
+  box-shadow: 0 0 0 3px rgba(22,163,74,0.12) !important;
+  outline: none !important;
+}
+
+.form-control::placeholder {
+  color: var(--rs-text-light) !important;
+  opacity: 1 !important;
+}
+
+/* ── Bootstrap Button Overrides ─────────────────────── */
+.btn {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.9375rem !important;
+  border-radius: var(--rs-radius) !important;
+  padding: 10px 20px !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
 .btn-primary {
-  background-color: var(--accent-primary) !important;
-  border-color: var(--accent-primary) !important;
+  background-color: var(--rs-green) !important;
+  border-color: var(--rs-green) !important;
+  color: #ffffff !important;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active {
-  background-color: var(--accent-secondary) !important;
-  border-color: var(--accent-secondary) !important;
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: var(--rs-green-dark) !important;
+  border-color: var(--rs-green-dark) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(22,163,74,0.25) !important;
+  transform: translateY(-1px) !important;
 }
 
-/* Bootstrap btn-secondary override */
 .btn-secondary {
-  background-color: var(--bg-primary) !important;
-  border: 2px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
+  background-color: var(--rs-bg) !important;
+  border: 1.5px solid var(--rs-border) !important;
+  color: var(--rs-text) !important;
 }
 
-.btn-secondary:hover,
-.btn-secondary:focus,
-.btn-secondary:active {
-  background-color: var(--bg-secondary) !important;
-  border-color: var(--accent-primary) !important;
-  color: var(--accent-primary) !important;
+.btn-secondary:hover {
+  background-color: var(--rs-bg-soft) !important;
+  border-color: var(--rs-green) !important;
+  color: var(--rs-green) !important;
 }
-/* Global Trip Card Styles - Shared across Search, MyTrips, and RideRequests */
+
+.btn-outline-danger {
+  border-color: var(--rs-danger) !important;
+  color: var(--rs-danger) !important;
+  background: transparent !important;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--rs-danger) !important;
+  color: #ffffff !important;
+}
+
+.btn-link {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ── Bootstrap Alert Overrides ──────────────────────── */
+.alert {
+  border-radius: var(--rs-radius) !important;
+  font-size: 0.9375rem !important;
+  padding: 12px 16px !important;
+  font-weight: 500 !important;
+  border-width: 1px !important;
+}
+
+.alert-success {
+  background-color: var(--rs-success-bg) !important;
+  border-color: var(--rs-green-border) !important;
+  color: var(--rs-green-text) !important;
+}
+
+.alert-danger {
+  background-color: var(--rs-danger-bg) !important;
+  border-color: var(--rs-danger-border) !important;
+  color: #991b1b !important;
+}
+
+[data-theme="dark"] .alert-danger {
+  background-color: var(--rs-danger-bg) !important;
+  color: var(--rs-danger) !important;
+}
+
+.alert-info {
+  background-color: var(--rs-green-light) !important;
+  border-color: var(--rs-green-border) !important;
+  color: var(--rs-green-text) !important;
+}
+
+[data-theme="dark"] .alert-info {
+  background-color: var(--rs-bg-green) !important;
+  color: var(--rs-green) !important;
+}
+
+.alert-warning {
+  background-color: var(--rs-warning-bg) !important;
+  border-color: #fde68a !important;
+  color: #92400e !important;
+}
+
+/* ── Bootstrap Card Override ────────────────────────── */
+.card {
+  background-color: var(--rs-bg) !important;
+  border: 1px solid var(--rs-border) !important;
+  border-radius: var(--rs-radius-md) !important;
+  box-shadow: var(--rs-shadow-sm) !important;
+}
+
+[data-theme="dark"] .card {
+  background-color: var(--rs-bg-soft) !important;
+}
+
+/* ── Bootstrap Tabs Override ────────────────────────── */
+.nav-tabs {
+  border-bottom: 1px solid var(--rs-border) !important;
+}
+
+.nav-tabs .nav-link {
+  font-size: 0.9375rem !important;
+  font-weight: 500 !important;
+  color: var(--rs-text-muted) !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  padding: 10px 16px !important;
+  border-radius: 0 !important;
+  transition: all 0.2s !important;
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--rs-text) !important;
+  border-bottom-color: var(--rs-border) !important;
+  background: transparent !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--rs-green) !important;
+  border-bottom: 2px solid var(--rs-green) !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+
+/* ── Shared Trip Card ───────────────────────────────── */
 .trip-card {
-  background: var(--bg-primary);
-  border-radius: 16px;
-  box-shadow: 0 2px 12px var(--shadow-light);
-  transition: all 0.3s ease;
-  border: 1px solid var(--border-color);
+  background: var(--rs-bg);
+  border: 1px solid var(--rs-border);
+  border-radius: var(--rs-radius-lg);
+  box-shadow: var(--rs-shadow-sm);
   overflow: hidden;
-  margin-bottom: 1.5rem;
-  position: relative;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
 .trip-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px var(--shadow-medium);
-  border-color: var(--accent-primary);
+  box-shadow: var(--rs-shadow-md);
+  border-color: var(--rs-green-border);
+  transform: translateY(-2px);
 }
 
 .trip-header {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  color: white;
-  padding: 1.5rem 2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.trip-title, .trip-header h5 {
-  color: white !important;
-  margin: 0;
-  font-size: 1.35rem;
-  font-weight: 700;
+  background: linear-gradient(135deg, var(--rs-green) 0%, var(--rs-green-dark) 100%);
+  padding: 16px 20px;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.trip-header h5,
+.trip-title {
+  color: #ffffff !important;
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
 }
 
 .trip-content {
-  padding: 1.75rem 2rem;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  padding: 20px;
+  background: var(--rs-bg);
+}
+
+[data-theme="dark"] .trip-content {
+  background: var(--rs-bg-soft);
 }
 
 .trip-info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .trip-info-item {
+  background: var(--rs-bg-soft);
+  border: 1px solid var(--rs-border);
+  border-left: 3px solid var(--rs-green);
+  border-radius: var(--rs-radius-sm);
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  padding: 0.875rem 1rem;
-  background: var(--bg-secondary);
-  border-radius: 10px;
-  border-left: 3px solid var(--accent-primary);
-  transition: all 0.3s ease;
+  gap: 3px;
+}
+
+[data-theme="dark"] .trip-info-item {
+  background: var(--rs-bg-muted);
 }
 
 .trip-info-label {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--rs-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .trip-info-value {
-  font-size: 1.05rem;
+  font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--rs-text);
 }
 
+/* ── Shared Action Buttons ──────────────────────────── */
 .action-button {
-  padding: 0.875rem 1.25rem;
+  padding: 10px 18px;
   border: none;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  border-radius: var(--rs-radius);
+  font-weight: 600;
+  font-size: 0.9375rem;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.2s ease;
 }
 
 .edit-button {
-  background: var(--accent-primary);
-  color: white !important;
+  background: var(--rs-green);
+  color: #ffffff !important;
+}
+
+.edit-button:hover {
+  background: var(--rs-green-dark);
+  box-shadow: 0 4px 12px rgba(22,163,74,0.25);
+  transform: translateY(-1px);
 }
 
 .delete-button {
-  background: var(--danger-color);
-  color: white !important;
+  background: var(--rs-danger);
+  color: #ffffff !important;
+}
+
+.delete-button:hover {
+  background: #dc2626;
+  box-shadow: 0 4px 12px rgba(239,68,68,0.25);
+  transform: translateY(-1px);
+}
+
+/* ── Badge styles ───────────────────────────────────── */
+.trip-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--rs-radius-full);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  background: rgba(255,255,255,0.15);
+}
+
+.past-badge {
+  background: rgba(0,0,0,0.2);
+  border-color: transparent;
+}
+
+/* ── iOS safe area & mobile fixes ───────────────────── */
+@supports (padding: env(safe-area-inset-top)) {
+  .main-content {
+    padding-left: calc(var(--rs-space-lg) + env(safe-area-inset-left));
+    padding-right: calc(var(--rs-space-lg) + env(safe-area-inset-right));
+    padding-bottom: calc(var(--rs-space-lg) + env(safe-area-inset-bottom));
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  input, select, textarea { font-size: 16px !important; }
+  .min-vh-100 { min-height: -webkit-fill-available !important; }
+  html { height: -webkit-fill-available !important; }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-top: 60px !important;
+    padding: 16px !important;
+  }
+
+  .trip-info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  h1 { font-size: 1.5rem !important; }
+  h2 { font-size: 1.25rem !important; }
+  h3 { font-size: 1.1rem !important; }
 }
