@@ -50,7 +50,7 @@ const requestCache = new RequestCache();
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
-  timeout: 30000, // 30 second timeout
+  timeout: 120000, // 2 minutes timeout
 });
 
 // Add request interceptor
