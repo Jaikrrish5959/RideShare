@@ -1,60 +1,72 @@
 /* Theme Variables */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root {
-  /* Light theme colors */
+  /* Light theme colors - Green RideShare Theme */
   --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: rgba(255, 255, 255, 0.95);
-  --text-primary: #2d3748;
+  --bg-secondary: #f8faf9;
+  --bg-tertiary: rgba(255, 255, 255, 0.97);
+  --text-primary: #1a1a2e;
   --text-secondary: #4a5568;
-  --text-muted: #6b7280;
+  --text-muted: #718096;
   --border-color: #e2e8f0;
-  --shadow-light: rgba(0, 0, 0, 0.1);
-  --shadow-medium: rgba(0, 0, 0, 0.15);
-  --shadow-heavy: rgba(0, 0, 0, 0.25);
-  --accent-primary: #4a9eff;
-  --accent-secondary: #6366f1;
-  --success-color: #10b981;
+  --shadow-light: rgba(0, 0, 0, 0.06);
+  --shadow-medium: rgba(0, 0, 0, 0.1);
+  --shadow-heavy: rgba(0, 0, 0, 0.18);
+  --accent-primary: #16A34A;
+  --accent-secondary: #15803D;
+  --accent-light: rgba(22, 163, 74, 0.08);
+  --accent-border: rgba(22, 163, 74, 0.2);
+  --success-color: #16A34A;
   --danger-color: #ef4444;
   --warning-color: #f59e0b;
   --button-text: #ffffff;
-  
+  --link-color: #16A34A;
+  --link-hover-color: #15803D;
+
   /* Toggle colors */
   --toggle-track-bg: #e5e7eb;
   --toggle-thumb-bg: #ffffff;
   --toggle-border: #d1d5db;
-  
+
   font-size: 16px !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a202c;
-  --bg-secondary: #2d3748;
-  --bg-tertiary: rgba(26, 32, 44, 0.95);
-  --text-primary: #f7fafc;
-  --text-secondary: #e2e8f0;
-  --text-muted: #a0aec0;
-  --border-color: #4a5568;
+  /* Dark theme colors - Green accent preserved */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: rgba(15, 23, 42, 0.97);
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
   --shadow-light: rgba(0, 0, 0, 0.3);
   --shadow-medium: rgba(0, 0, 0, 0.4);
   --shadow-heavy: rgba(0, 0, 0, 0.6);
-  --accent-primary: #63b3ed;
-  --accent-secondary: #805ad5;
-  --success-color: #68d391;
-  --danger-color: #fc8181;
-  --warning-color: #f6e05e;
+  --accent-primary: #22c55e;
+  --accent-secondary: #16a34a;
+  --accent-light: rgba(34, 197, 94, 0.1);
+  --accent-border: rgba(34, 197, 94, 0.25);
+  --success-color: #4ade80;
+  --danger-color: #f87171;
+  --warning-color: #fbbf24;
   --button-text: #ffffff;
-  
+  --link-color: #4ade80;
+  --link-hover-color: #22c55e;
+
   /* Toggle colors */
-  --toggle-track-bg: #4a5568;
-  --toggle-thumb-bg: #2d3748;
-  --toggle-border: #718096;
+  --toggle-track-bg: #334155;
+  --toggle-thumb-bg: #1e293b;
+  --toggle-border: #475569;
 }
 
 /* Apply theme colors to body and all text elements */
 body {
   background-color: var(--bg-primary) !important;
   color: var(--text-primary) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
@@ -71,8 +83,8 @@ body {
 }
 
 /* Specific text element overrides with higher specificity */
-p, span, div, h1, h2, h3, h4, h5, h6, 
-label, td, th, li, a, small, 
+p, span, div, h1, h2, h3, h4, h5, h6,
+label, td, th, li, a, small,
 .text-muted, .text-secondary,
 .form-label, .form-text, .form-control,
 .card-text, .card-title, .card-subtitle,
@@ -83,7 +95,7 @@ label, td, th, li, a, small,
 
 /* General alert styling that works with themes */
 .alert {
-  border-radius: 8px !important;
+  border-radius: 10px !important;
   border-width: 1px !important;
   font-weight: 500 !important;
   transition: all 0.3s ease !important;
@@ -119,10 +131,10 @@ small.text-secondary {
 
 /* Fix navbar gap */
 .main-content {
-  margin-top: 60px !important;
-  padding: 20px;
+  margin-top: 64px !important;
+  padding: 24px;
   background-color: var(--bg-primary) !important;
-  min-height: calc(100vh - 60px) !important;
+  min-height: calc(100vh - 64px) !important;
   transition: background-color 0.3s ease;
 }
 
@@ -148,25 +160,25 @@ small.text-secondary {
 }
 
 [data-theme="dark"] .alert-info {
-  background-color: rgba(99, 102, 241, 0.15) !important;
-  border-color: var(--accent-secondary) !important;
+  background-color: var(--accent-light) !important;
+  border-color: var(--accent-border) !important;
   color: var(--text-primary) !important;
 }
 
 [data-theme="dark"] .alert-danger {
-  background-color: rgba(239, 68, 68, 0.15) !important;
+  background-color: rgba(239, 68, 68, 0.12) !important;
   border-color: var(--danger-color) !important;
   color: var(--text-primary) !important;
 }
 
 [data-theme="dark"] .alert-success {
-  background-color: rgba(16, 185, 129, 0.15) !important;
+  background-color: rgba(34, 197, 94, 0.12) !important;
   border-color: var(--success-color) !important;
   color: var(--text-primary) !important;
 }
 
 [data-theme="dark"] .alert-warning {
-  background-color: rgba(245, 158, 11, 0.15) !important;
+  background-color: rgba(245, 158, 11, 0.12) !important;
   border-color: var(--warning-color) !important;
   color: var(--text-primary) !important;
 }
@@ -211,7 +223,7 @@ small.text-secondary {
 }
 
 [data-theme="light"] .nav-tabs .nav-link.active {
-  color: var(--text-primary) !important;
+  color: var(--accent-primary) !important;
   background-color: var(--bg-primary) !important;
 }
 
@@ -223,26 +235,26 @@ small.text-secondary {
 }
 
 [data-theme="light"] .alert-info {
-  background-color: rgba(99, 102, 241, 0.1) !important;
-  border-color: var(--accent-secondary) !important;
+  background-color: var(--accent-light) !important;
+  border-color: var(--accent-border) !important;
   color: var(--text-primary) !important;
 }
 
 [data-theme="light"] .alert-danger {
-  background-color: rgba(239, 68, 68, 0.1) !important;
-  border-color: var(--danger-color) !important;
+  background-color: rgba(239, 68, 68, 0.08) !important;
+  border-color: rgba(239, 68, 68, 0.2) !important;
   color: var(--text-primary) !important;
 }
 
 [data-theme="light"] .alert-success {
-  background-color: rgba(16, 185, 129, 0.1) !important;
-  border-color: var(--success-color) !important;
+  background-color: rgba(22, 163, 74, 0.08) !important;
+  border-color: rgba(22, 163, 74, 0.2) !important;
   color: var(--text-primary) !important;
 }
 
 [data-theme="light"] .alert-warning {
-  background-color: rgba(245, 158, 11, 0.1) !important;
-  border-color: var(--warning-color) !important;
+  background-color: rgba(245, 158, 11, 0.08) !important;
+  border-color: rgba(245, 158, 11, 0.2) !important;
   color: var(--text-primary) !important;
 }
 
@@ -283,7 +295,7 @@ small.text-secondary {
   }
 
   /* Ensure readable text */
-  p, .card-text { 
+  p, .card-text {
     font-size: 16px !important;
     line-height: 1.5 !important;
   }
@@ -430,4 +442,127 @@ input[type="button"],
 .btn-outline-light:hover,
 .btn-outline-dark:hover {
   color: var(--button-text) !important;
+}
+
+/* Bootstrap btn-primary override to green */
+.btn-primary {
+  background-color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--accent-secondary) !important;
+  border-color: var(--accent-secondary) !important;
+}
+
+/* Bootstrap btn-secondary override */
+.btn-secondary {
+  background-color: var(--bg-primary) !important;
+  border: 2px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--accent-primary) !important;
+  color: var(--accent-primary) !important;
+}
+/* Global Trip Card Styles - Shared across Search, MyTrips, and RideRequests */
+.trip-card {
+  background: var(--bg-primary);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px var(--shadow-light);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.trip-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px var(--shadow-medium);
+  border-color: var(--accent-primary);
+}
+
+.trip-header {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.trip-title, .trip-header h5 {
+  color: white !important;
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.trip-content {
+  padding: 1.75rem 2rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.trip-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.trip-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.875rem 1rem;
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  border-left: 3px solid var(--accent-primary);
+  transition: all 0.3s ease;
+}
+
+.trip-info-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trip-info-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.action-button {
+  padding: 0.875rem 1.25rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.edit-button {
+  background: var(--accent-primary);
+  color: white !important;
+}
+
+.delete-button {
+  background: var(--danger-color);
+  color: white !important;
 }

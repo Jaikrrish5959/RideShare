@@ -1,34 +1,31 @@
 /* src/components/PostTrip.css */
 
 .post-trip-container {
-  max-width: 600px;
+  max-width: 640px;
   margin: 30px auto;
   padding: 2.5rem;
-  background: var(--bg-tertiary);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px 0 var(--shadow-medium);
-  backdrop-filter: blur(8px);
+  background: var(--bg-primary);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--shadow-light);
   border: 1px solid var(--border-color);
-  transform: translateY(0);
   transition: all 0.3s ease;
 }
 
 .post-trip-container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 var(--shadow-heavy);
+  box-shadow: 0 8px 32px var(--shadow-medium);
 }
 
 .post-trip-container h2 {
   color: var(--text-primary);
   text-align: center;
   margin-bottom: 2rem;
-  font-weight: 600;
-  font-size: 2rem;
+  font-weight: 700;
+  font-size: 1.75rem;
 }
 
 .form-floating {
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
   padding: 0.25rem;
   padding-top: 0;
   border-radius: 8px;
@@ -36,7 +33,7 @@
 }
 
 .form-floating:focus-within {
-  background: rgba(74, 158, 255, 0.05);
+  background: var(--accent-light);
   padding: 0.35rem;
   padding-top: 0;
 }
@@ -46,7 +43,7 @@
   font-weight: 500;
   margin-bottom: 0.5rem;
   display: block;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.01em;
   transition: color 0.3s ease;
 }
@@ -54,8 +51,8 @@
 .modern-input {
   width: 100%;
   padding: 0.875rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
   font-size: 1rem;
   background: var(--bg-primary) !important;
   transition: all 0.3s ease;
@@ -65,7 +62,7 @@
 .modern-input::placeholder {
   color: var(--text-muted) !important;
   opacity: 1 !important;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: color 0.3s ease;
 }
 
@@ -107,7 +104,7 @@
 
 .modern-input:focus {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 4px rgba(74, 158, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
   outline: none;
   background: var(--bg-primary) !important;
   color: var(--text-primary) !important;
@@ -119,14 +116,14 @@
 
 .submit-button {
   width: 100%;
-  padding: 1rem;
+  padding: 0.875rem;
   margin-top: 1rem;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  background: var(--accent-primary);
   color: white;
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 1.05rem;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -134,8 +131,9 @@
 }
 
 .submit-button:hover {
+  background: var(--accent-secondary);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.3);
 }
 
 .submit-button:active {
@@ -152,7 +150,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.15),
     transparent
   );
   transition: 0.5s;
@@ -172,23 +170,24 @@
 
 /* Success message styling */
 .success-message {
-  background: rgba(72, 187, 120, 0.1);
+  background: var(--accent-light);
   color: var(--success-color);
   padding: 1rem;
-  border-radius: 12px;
+  border-radius: 10px;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  border: 1px solid var(--accent-border);
 }
 
 /* Error message styling */
 .alert-danger {
-  background: rgba(245, 101, 101, 0.1);
+  background: rgba(239, 68, 68, 0.08);
   color: var(--danger-color);
-  border: none;
-  border-radius: 12px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 10px;
   margin-bottom: 1.5rem;
 }
 
@@ -238,7 +237,7 @@
   color: var(--text-secondary) !important;
   font-weight: 500;
   margin-bottom: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: color 0.3s ease;
 }
 
@@ -255,12 +254,12 @@
 }
 
 .seats-button {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  background: var(--accent-primary);
   color: white;
   border: none;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
@@ -270,8 +269,9 @@
 }
 
 .seats-button:hover {
+  background: var(--accent-secondary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
 }
 
 .seats-input {
@@ -303,25 +303,25 @@
   }
 
   .form-label {
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
     margin-bottom: 0.5rem;
   }
 
   .form-control {
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
     padding: 0.75rem 1rem !important;
     height: 48px !important;
   }
 
   .btn {
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
     padding: 0.75rem 1.25rem !important;
     width: 100%;
     min-height: 48px;
   }
 
   .seats-input {
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
     height: 48px !important;
   }
 
