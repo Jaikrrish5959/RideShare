@@ -1,17 +1,15 @@
-/* ── Home / LoginSignup Layout ──────────────────────── */
-/* Pure white background, centered card, green CTA     */
-
+/* ── Home / Auth Page ───────────────────────────────── */
 .home-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f9fafb;
-  padding: 24px 16px;
+  min-height: calc(100vh - 72px);
+  background: linear-gradient(160deg, #f8fafc 0%, #f1f5f9 60%, #e8f8f3 100%);
+  padding: 48px 24px;
 }
 
 [data-theme="dark"] .home-container {
-  background-color: #0f172a;
+  background: linear-gradient(160deg, #0c1118 0%, #141c26 70%, #0c1f1a 100%);
 }
 
 .content-wrapper {
@@ -20,83 +18,77 @@
   align-items: center;
   width: 100%;
   max-width: 1100px;
-  gap: 32px;
+  gap: 40px;
 }
 
-/* Left text block */
-.welcome-text {
-  text-align: center;
-}
+/* Hero text */
+.welcome-text { text-align: center; max-width: 560px; }
 
 .welcome-text h2 {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   font-weight: 800;
-  color: #111827;
-  margin-bottom: 12px;
-  line-height: 1.2;
+  color: #0f172a;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
 }
 
-[data-theme="dark"] .welcome-text h2 {
-  color: #f1f5f9;
-}
+[data-theme="dark"] .welcome-text h2 { color: #f1f5f9; }
 
 .welcome-text p {
   font-size: 1.0625rem;
-  color: #6b7280;
-  margin-bottom: 0;
-  line-height: 1.6;
+  color: #64748b;
+  line-height: 1.7;
+  margin: 0;
 }
 
-[data-theme="dark"] .welcome-text p {
-  color: #94a3b8;
-}
+[data-theme="dark"] .welcome-text p { color: #94a3b8; }
 
-/* Login card wrapper */
+/* Login card */
 .login-form {
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
 }
 
-/* CTA buttons on authenticated home */
+/* CTA for authenticated home */
 .cta-buttons {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 8px;
 }
 
 .cta-buttons .btn {
   font-size: 0.9375rem !important;
   font-weight: 600 !important;
-  padding: 12px 28px !important;
-  border-radius: 10px !important;
-  transition: all 0.2s ease !important;
+  height: 52px !important;
+  padding: 0 32px !important;
+  border-radius: 16px !important;
+  transition: all 200ms cubic-bezier(0.4,0,0.2,1) !important;
 }
 
-/* Primary green CTA */
 .cta-buttons .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(22,163,74,0.3) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(16,185,129,0.30) !important;
 }
 
-/* Outlined secondary CTA */
 .cta-buttons .btn-secondary {
   background: #ffffff !important;
-  border: 1.5px solid #e5e7eb !important;
-  color: #111827 !important;
+  border: 1px solid rgba(148,163,184,0.25) !important;
+  color: #1e293b !important;
 }
 
 .cta-buttons .btn-secondary:hover {
-  border-color: #16a34a !important;
-  color: #16a34a !important;
-  background: #ffffff !important;
+  border-color: #10b981 !important;
+  color: #10b981 !important;
+  transform: translateY(-2px) !important;
 }
 
 @media (max-width: 768px) {
-  .welcome-text h2 { font-size: 1.65rem; }
+  .home-container { padding: 32px 16px; }
+  .welcome-text h2 { font-size: 1.75rem; }
   .welcome-text p  { font-size: 1rem; }
-  .content-wrapper { gap: 20px; }
-  .cta-buttons { flex-direction: column; width: 100%; max-width: 280px; }
+  .content-wrapper { gap: 24px; }
+  .cta-buttons { flex-direction: column; width: 100%; max-width: 300px; }
   .cta-buttons .btn { width: 100%; }
 }
