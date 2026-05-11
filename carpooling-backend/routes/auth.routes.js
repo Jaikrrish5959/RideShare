@@ -35,11 +35,11 @@ router.post('/signup', async (req, res) => {
       password, // Assuming you have password hashing in your User model
       verificationToken,
       verificationTokenExpires,
-      isVerified: true
+      isVerified: false
     });
 
-    // Send verification email in background (don't wait for it)
-    emailService.sendVerificationEmail(email, verificationToken).catch(err => logger.error('Email sending failed', err));
+    // Send verification email
+    await emailService.sendVerificationEmail(email, verificationToken);
 
     const duration = Date.now() - startTime;
     logger.logAuth('signup_success', email, true, ip);
@@ -150,7 +150,7 @@ router.post('/resend-verification', async (req, res) => {
       verificationTokenExpires
     });
 
-    emailService.sendVerificationEmail(email, verificationToken).catch(err => console.error('Email sending failed', err));
+    await emailService.sendVerificationEmail(email, verificationToken);
     res.json({ message: 'Verification email sent successfully' });
   } catch (error) {
     console.error('Resend verification error:', error);
