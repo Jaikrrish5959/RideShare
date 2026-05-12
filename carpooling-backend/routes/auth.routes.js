@@ -25,21 +25,12 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ message: 'Email already registered' });
     }
 
-    // Generate verification token
-    const verificationToken = crypto.randomBytes(32).toString('hex');
-    const verificationTokenExpires = new Date(Date.now() + (24 * 60 * 60 * 1000)); // 24 hours from now
-
-    // Create user
+    // Create user — auto-verified (email verification disabled)
     const user = await User.create({
       email,
-      password, // Assuming you have password hashing in your User model
-      verificationToken,
-      verificationTokenExpires,
-      isVerified: false
+      password,
+      isVerified: true
     });
-
-    // Send verification email
-    await emailService.sendVerificationEmail(email, verificationToken);
 
     const duration = Date.now() - startTime;
     logger.logAuth('signup_success', email, true, ip);
@@ -50,7 +41,7 @@ router.post('/signup', async (req, res) => {
       duration: `${duration}ms` 
     });
 
-    res.status(201).json({ message: 'Registration successful. Please check your email for verification.' });
+    res.status(201).json({ message: 'Registration successful. You can now log in.' });
   } catch (error) {
     const duration = Date.now() - startTime;
     logger.logAuth('signup_error', email, false, ip, error);
@@ -174,11 +165,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    // Check if email is verified
-    if (!user.isVerified) {
-      logger.logAuth('login_failed', email, false, ip, new Error('Email not verified'));
-      return res.status(403).json({ message: 'Please verify your email before logging in' });
-    }
+    // Email verification disabled — all users can log in directly
 
     // Check password
     const validPassword = await bcrypt.compare(password, user.password);

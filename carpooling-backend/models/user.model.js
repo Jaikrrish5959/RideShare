@@ -32,7 +32,7 @@ const User = sequelize.define('User', {
   },
   isVerified: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false
+    defaultValue: true  // Email verification disabled — users auto-verified on signup
   },
   verificationToken: {
     type: DataTypes.STRING(64),
