@@ -36,4 +36,13 @@ const auth = (req, res, next) => {
   }
 };
 
-module.exports = { auth };
+const isAdmin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    next();
+  } else {
+    logger.logAuth('admin_access_denied', req.user?.email, false, req.ip);
+    return res.status(403).json({ message: 'Access denied: Admin privileges required' });
+  }
+};
+
+module.exports = { auth, isAdmin };

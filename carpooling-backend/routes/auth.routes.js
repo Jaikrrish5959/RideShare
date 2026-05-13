@@ -176,7 +176,7 @@ router.post('/login', async (req, res) => {
 
     // Generate JWT token
     const token = jwt.sign(
-      { userId: user.id, email: user.email },
+      { userId: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: '24h' }
     );
@@ -197,7 +197,8 @@ router.post('/login', async (req, res) => {
         id: user.id,
         email: user.email,
         username: user.username,
-        phoneNumber: user.phoneNumber
+        phoneNumber: user.phoneNumber,
+        role: user.role
       }
     });
   } catch (error) {

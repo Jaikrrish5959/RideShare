@@ -59,7 +59,7 @@ app.use((req, res, next) => {
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? [process.env.FRONTEND_URL || 'https://carpooling-website-1.onrender.com']
-    : 'http://localhost:3000',
+    : ['http://localhost:3000', 'http://localhost:3001'],
   credentials: true
 }));
 
@@ -139,6 +139,8 @@ app.delete('/api/cache', (req, res) => {
   res.json({ message: 'Cache cleared successfully' });
 });
 
+const adminRoutes = require('./routes/admin.routes');
+
 /**
  * API Routes
  * All routes are prefixed with /api for better organization
@@ -146,6 +148,7 @@ app.delete('/api/cache', (req, res) => {
 app.use('/api/auth', authRoutes);     // Authentication: signup, login, verify email
 app.use('/api/trips', tripRoutes);    // Trip management: CRUD operations, ride requests
 app.use('/api/user', userRoutes);     // User management: profile, settings, password
+app.use('/api/admin', adminRoutes);   // Admin dashboard routes
 
 /**
  * Global error handling middleware

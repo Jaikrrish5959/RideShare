@@ -41,6 +41,10 @@ const User = sequelize.define('User', {
   verificationTokenExpires: {
     type: DataTypes.DATE,
     allowNull: true
+  },
+  role: {
+    type: DataTypes.ENUM('user', 'admin'),
+    defaultValue: 'user'
   }
 }, {
   hooks: {

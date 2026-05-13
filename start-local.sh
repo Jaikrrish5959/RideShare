@@ -100,8 +100,18 @@ if [ ! -d "carpooling-frontend/node_modules" ]; then
     echo "✅ Frontend dependencies installed"
 fi
 
+if [ ! -d "carpooling-admin/node_modules" ]; then
+    echo "⚠️  Admin frontend dependencies not installed"
+    echo "Installing admin frontend dependencies..."
+    cd carpooling-admin
+    npm install
+    cd ..
+    echo "✅ Admin frontend dependencies installed"
+fi
+
 # Create logs directory if it doesn't exist
 mkdir -p carpooling-backend/logs
+mkdir -p carpooling-admin/logs
 
 echo ""
 echo "================================================"
@@ -122,6 +132,10 @@ cleanup() {
     if [ ! -z "$FRONTEND_PID" ]; then
         kill $FRONTEND_PID 2>/dev/null || true
         echo "✅ Frontend server stopped"
+    fi
+    if [ ! -z "$ADMIN_PID" ]; then
+        kill $ADMIN_PID 2>/dev/null || true
+        echo "✅ Admin frontend server stopped"
     fi
     exit 0
 }
@@ -156,21 +170,34 @@ else
 fi
 
 echo ""
-echo "Starting frontend server on port 3000..."
+echo "Starting main frontend server on port 3000..."
 cd carpooling-frontend
 npm start > /dev/null 2>&1 &
 FRONTEND_PID=$!
 cd ..
 
-echo "⏳ Waiting for frontend to compile..."
+echo "Starting admin frontend server on port 3001..."
+cd carpooling-admin
+npm run dev > logs/server.log 2>&1 &
+ADMIN_PID=$!
+cd ..
+
+echo "⏳ Waiting for frontends to compile..."
 sleep 15
 
-# Check if frontend is running
+# Check if frontends are running
 if kill -0 $FRONTEND_PID 2>/dev/null; then
-    echo "✅ Frontend server is running (PID: $FRONTEND_PID)"
+    echo "✅ Main Frontend server is running (PID: $FRONTEND_PID)"
     echo "   URL: http://localhost:3000"
 else
-    echo "⚠️  Frontend server may have issues"
+    echo "⚠️  Main Frontend server may have issues"
+fi
+
+if kill -0 $ADMIN_PID 2>/dev/null; then
+    echo "✅ Admin Frontend server is running (PID: $ADMIN_PID)"
+    echo "   URL: http://localhost:3001"
+else
+    echo "⚠️  Admin Frontend server may have issues"
 fi
 
 echo ""
@@ -178,15 +205,16 @@ echo "================================================"
 echo "ShareRides is now running!"
 echo "================================================"
 echo ""
-echo "📱 Frontend:  http://localhost:3000"
-echo "🔧 Backend:   http://localhost:5000"
-echo "❤️  Health:    http://localhost:5000/api/health"
+echo "📱 Frontend:      http://localhost:3000"
+echo "🛠️  Admin Panel:  http://localhost:3001"
+echo "🔧 Backend:       http://localhost:5000"
+echo "❤️  Health:        http://localhost:5000/api/health"
 echo ""
 echo "Press Ctrl+C to stop all servers"
 echo ""
 echo "Logs:"
 echo "  Backend:  tail -f carpooling-backend/logs/server.log"
-echo "  Combined: tail -f carpooling-backend/logs/combined.log"
+echo "  Admin:    tail -f carpooling-admin/logs/server.log"
 echo ""
 
 # Wait indefinitely until Ctrl+C
